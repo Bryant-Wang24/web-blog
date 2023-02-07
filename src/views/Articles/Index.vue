@@ -6,44 +6,58 @@
         <RightConfig showPosition="文章"></RightConfig>
       </div>
       <div :class="[{ 'wap-left': !isPC }, 'left']">
-        <mu-card class="card" @click="goDetail(1)">
+        <mu-card class="card" @click="goDetail(item.id)"
+          v-for="(item, index) in info.list"
+          :key="index"
+        >
           <div v-if="isPC" class="cover">
             <img
               class="cover-img"
-              src="http://nevergiveupt.top/canvas/html2canvas.png"
+              :src=item.cover
+              alt="封面"
             />
           </div>
           <div class="card-box">
-            <div class="title">使用jspdf+canvas2html将网页保存为pdf文件</div>
+            <div class="title">{{item.title}}</div>
             <mu-card-actions class="sub-title">
               <mu-button class="cursor-default" flat color="info"
-                >查看(10)</mu-button
+                >查看({{item.views}})</mu-button
               >
               <mu-button class="cursor-default" flat color="error"
-                >评论(0)</mu-button
+                >评论({{item.comment}})</mu-button
               >
               <mu-button class="cursor-default" flat color="primary"
-                >点赞(20)</mu-button
+                >点赞({{item.like}})</mu-button
               >
               <mu-button class="cursor-default" flat color="#9e9e9e"
-                >2021-02-04 09:57</mu-button
+                >{{item.updateTime}}</mu-button
               >
             </mu-card-actions>
-            <mu-card-text class="text">简介</mu-card-text>
+            <mu-card-text v-if="item.introduction" class="text">简介: {{item.introduction}}</mu-card-text>
             <mu-card-actions>
               <mu-button flat class="chip cursor-default" color="primary">
                 <mu-icon left value="dns"></mu-icon>
-                分类
+                {{item.categories}}
               </mu-button>
 
-              <mu-button flat class="chip cursor-default">
+              <!-- v-for渲染标签 -->
+              <mu-button
+                v-for="(tag, index) in item.tags"
+                :key="index"
+                flat
+                class="chip cursor-default"
+              >
+                <mu-icon left value="loyalty"></mu-icon>
+                {{tag}}
+              </mu-button>
+              <!-- <mu-button flat class="chip cursor-default">
                 <mu-icon left value="loyalty"></mu-icon>
                 标签1
-              </mu-button>
-              <mu-button flat class="chip cursor-default">
+              </mu-button> -->
+              <!-- <mu-button flat class="chip cursor-default">
                 <mu-icon left value="loyalty"></mu-icon>
                 标签2
-              </mu-button>
+              </mu-button> -->
             </mu-card-actions>
           </div>
         </mu-card>
@@ -66,10 +80,11 @@
   </div>
 </template>
 <script>
+import dayjs from "dayjs";
 import RightConfig from "@/components/RightConfig";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-
+import {getArticleList} from "../../api/article";
 export default {
   name: "articles",
   components: {
@@ -105,7 +120,7 @@ export default {
             sort: 0,
             status: 1,
             tags: ["Canvas", "Pdf.js"],
-            title: "使用jspdf+canvas2html将网页保存为pdf文件",
+            title: "测试 1",
             updateTime: 1612416421,
             views: 9,
             _id: "601b546ce268db458626529c",
@@ -137,12 +152,24 @@ export default {
       },
     };
   },
-  mounted() {},
+  mounted() {
+    getArticleList ().then((res) => {
+      if(res.code === 0) {
+        // 格式化时间
+        res.data.list.forEach((item) => {
+          item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss");
+          // tags转数组
+          item.tags = item.tags.split(",");
+        });
+        this.info = res.data;
+      }
+    });
+  },
   methods: {
-    goDetail(_id) {
+    goDetail(id) {
       this.$router.push({
         name: "articlesDetails",
-        query: { id: _id },
+        query: { id: id },
       });
     },
   },
@@ -170,6 +197,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         border-radius: 5px;
+        cursor: pointer;
         &:hover {
           animation: pulse 1s;
         }

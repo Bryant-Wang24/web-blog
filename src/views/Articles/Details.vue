@@ -48,26 +48,26 @@
             </mu-card-media>
             <mu-card-actions class="sub-title">
               <mu-button class="cursor-default" flat color="warning"
-                >字数(1000)</mu-button
+                >字数({{ info.content.length }})</mu-button
               >
               <mu-button class="cursor-default" flat color="secondary"
                 >阅读大约2分钟</mu-button
               >
               <mu-button class="cursor-default" flat color="info"
-                >查看(100)</mu-button
+                >查看({{ info.views }})</mu-button
               >
               <mu-button class="cursor-default" flat color="error"
-                >评论(100)</mu-button
+                >评论({{ info.comment }})</mu-button
               >
               <mu-button class="cursor-default" flat color="primary"
-                >点赞(100)</mu-button
+                >点赞({{ info.like }})</mu-button
               >
               <mu-button class="cursor-default" flat color="#9e9e9e"
-                >2021-05-20 13:14</mu-button
+                >{{ info.updateTime }}</mu-button
               >
             </mu-card-actions>
             <mavonEditor
-              v-model="content"
+              v-model="info.content"
               :ishljs="true"
               :toolbarsFlag="false"
               :subfield="false"
@@ -79,17 +79,25 @@
             <mu-card-actions>
               <mu-button class="cursor-default" flat color="primary">
                 <mu-icon left value="dns"></mu-icon>
-                分类
+                {{ info.categories }}
               </mu-button>
-
-              <mu-button class="cursor-default" flat>
+              <mu-button
+                v-for="(tag, index) in info.tags"
+                :key="index"
+                flat
+                class="chip cursor-default"
+              >
+                <mu-icon left value="loyalty"></mu-icon>
+                {{tag}}
+              </mu-button>
+              <!-- <mu-button class="cursor-default" flat>
                 <mu-icon left value="loyalty"></mu-icon>
                 标签1
               </mu-button>
               <mu-button class="cursor-default" flat>
                 <mu-icon left value="loyalty"></mu-icon>
                 标签2
-              </mu-button>
+              </mu-button> -->
             </mu-card-actions>
           </mu-card>
 
@@ -147,6 +155,8 @@ import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 import { markdown } from "@/utils/markdown";
 import $ from "jquery";
+import { getArticleDetail } from '../../api/article';
+import dayjs from "dayjs";
 
 export default {
   name: "articlesDetails",
@@ -162,7 +172,7 @@ export default {
   data() {
     return {
       info: {
-        _id: "601134b4c4ae0128013d322d",
+        id: "601134b4c4ae0128013d322d",
         title: "使用jspdf+canvas2html将网页保存为pdf文件",
         introduction: "简介",
         cover: "http://nevergiveupt.top/canvas/html2canvas.png",
@@ -267,6 +277,23 @@ export default {
   },
   computed: {},
   mounted() {
+    getArticleDetail(this.$route.query.id).then((res) => {
+      console.log("res", res);
+      // 格式化时间
+      res.data.updateTime = dayjs(res.data.updateTime).format("YYYY-MM-DD HH:mm:ss")
+      res.data.content = markdown(mavonEditor, res.data.content);
+      res.data.tags = res.data.tags.split(",");
+      this.info = res.data;
+      // this.article = res.data.data;
+      // this.content = markdown(mavonEditor, this.article.content);
+      // this.toc = this.$refs.mavonEditor.$refs.toc.toc;
+      // this.$nextTick(() => {
+      //   const aArr = $(".v-note-wrapper .v-note-panel .v-note-navigation a");
+      //   aArr.each((index, item) => {
+      //     $(item).attr("target", "_blank");
+      //   });
+      // });
+    });
     this.content = markdown(
       mavonEditor,
       "在前端开发中， html 转 pdf 是最常见的需求，实现这块需求的开发[html2canvas](http://html2canvas.hertzen.com/)和 [jspdf](http://mozilla.github.io/pdf.js/getting_started/) 是最常用的两个插件，插件都是现成的。\n### 1.安装\n### 2.使用 \n ```js \n console.log(123); \n```"

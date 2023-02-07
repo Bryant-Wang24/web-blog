@@ -153,6 +153,7 @@ if (hours >= 8 && hours <= 18) {
 } else {
   defaultTheme = "selfDark";
 }
+
 const selfTheme = localStorage.getItem("theme") || defaultTheme;
 theme.use(selfTheme);
 Vue.prototype.theme = theme;

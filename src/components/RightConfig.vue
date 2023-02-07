@@ -2,33 +2,34 @@
   <div class="right-config">
     <mu-card class="slider-card">
       <mu-avatar class="avatar" size="100">
-        <img v-lazy="avatar" alt />
+        <img src="../assets/wqs.jpg" alt />
       </mu-avatar>
-      <div class="title">NeverGiveUpT</div>
-      <div class="desc">专注于WEB和移动前端开发</div>
+      <div class="title">王秋爽</div>
+      <div class="desc">专注于Golang开发，在前端方面也有开发经验</div>
       <div class="tags">
-        <mu-chip class="chip">Vue</mu-chip>
-        <mu-chip class="chip">React</mu-chip>
-        <mu-chip class="chip">4年开发经验</mu-chip>
+        <mu-chip class="chip">Golang</mu-chip>
+        <!-- <mu-chip class="chip">Vue</mu-chip>
+        <mu-chip class="chip">React</mu-chip> -->
+        <mu-chip class="chip">3年开发经验</mu-chip>
       </div>
       <div class="friend-link-box">
         <p class="friend-link-title">友情链接</p>
         <div class="friend-links">
-          <mu-button class="link" fab small>
+          <mu-button class="link" fab small @click="handleJumpToGithub">
             <mu-avatar size="40">
               <img src="http://www.nevergiveupt.top/github.png" alt />
             </mu-avatar>
           </mu-button>
-          <mu-button class="link" fab small>
-            <mu-avatar size="40">
-              <img src="http://www.nevergiveupt.top/sf.jpeg" alt />
-            </mu-avatar>
-          </mu-button>
-          <mu-button class="link" fab small>
+          <mu-button class="link" fab small @click="handleJumpToZhiHu">
             <mu-avatar size="40">
               <img src="http://www.nevergiveupt.top/zhihu.jpg" alt />
             </mu-avatar>
           </mu-button>
+          <!-- <mu-button class="link" fab small>
+            <mu-avatar size="40">
+              <img src="http://www.nevergiveupt.top/zhihu.jpg" alt />
+            </mu-avatar>
+          </mu-button> -->
         </div>
       </div>
     </mu-card>
@@ -50,7 +51,7 @@
         <p class="friend-link-title">电影推荐</p>
         <div class="friend-links">
           <div class="tags">
-            <mu-chip class="chip">唐人街探案3</mu-chip>
+            <mu-chip class="chip">流浪地球2</mu-chip>
           </div>
         </div>
       </div>
@@ -59,7 +60,7 @@
         <p class="friend-link-title">电视剧推荐</p>
         <div class="friend-links">
           <div class="tags">
-            <mu-chip class="chip">赘婿</mu-chip>
+            <mu-chip class="chip">狂飙</mu-chip>
           </div>
         </div>
       </div>
@@ -68,7 +69,7 @@
         <p class="friend-link-title">音乐推荐</p>
         <div class="friend-links">
           <div class="tags">
-            <mu-chip class="chip">半生雪</mu-chip>
+            <mu-chip class="chip">ONE</mu-chip>
           </div>
         </div>
       </div>
@@ -90,9 +91,17 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
-  methods: {},
-};
+  mounted() {
+  },
+  methods: {
+    handleJumpToGithub() {
+      window.open("https://github.com/Bryant-Wang24");
+    },
+    handleJumpToZhiHu() {
+      window.open("https://www.zhihu.com/people/tian-fan-di-fu-97/posts");
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .right-config {

@@ -2,11 +2,11 @@
   <div class="header">
     <mu-appbar :color="background">
       <!-- title -->
-      <span style="cursor: pointer">NeverGiveUpT</span>
+      <span style="cursor: pointer">王秋爽</span>
 
-      <!-- <mu-avatar slot="left" class="header-avatar" :size="50">
-        <img src="http://www.nevergiveupt.top/user_avatar.png" />
-      </mu-avatar> -->
+      <mu-avatar slot="left" class="header-avatar" :size="50">
+        <img src="../assets/wqs.jpg" />
+      </mu-avatar>
 
       <!-- 菜单 -->
       <mu-button
@@ -79,11 +79,11 @@
       <!-- 用户 -->
       <mu-button flat slot="right" ref="button" @click="openUser = !openUser">
         <div class="user">
-          <span>永不放弃</span>
-          <mu-icon value="expand_more"></mu-icon>
+          <span>王秋爽</span>
+          <!-- <mu-icon value="expand_more"></mu-icon> -->
         </div>
       </mu-button>
-      <mu-popover :open.sync="openUser" :trigger="trigger">
+      <!-- <mu-popover :open.sync="openUser" :trigger="trigger">
         <mu-list>
           <mu-list-item button>
             <mu-list-item-title>个人中心</mu-list-item-title>
@@ -92,7 +92,7 @@
             <mu-list-item-title>退出登录</mu-list-item-title>
           </mu-list-item>
         </mu-list>
-      </mu-popover>
+      </mu-popover> -->
     </mu-appbar>
 
     <!-- 搜索按钮 -->
