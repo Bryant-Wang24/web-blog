@@ -51,7 +51,7 @@
                 >字数({{ info.content.length }})</mu-button
               >
               <mu-button class="cursor-default" flat color="secondary"
-                >阅读大约2分钟</mu-button
+                >阅读大约{{ Math.ceil(info.content.length / 1000) }}分钟</mu-button
               >
               <mu-button class="cursor-default" flat color="info"
                 >查看({{ info.views }})</mu-button
@@ -72,7 +72,7 @@
               :toolbarsFlag="false"
               :subfield="false"
               defaultOpen="preview"
-              codeStyle="tomorrow-night-eighties"
+              codeStyle="github"
               :navigation="isPC"
             />
 
@@ -150,10 +150,10 @@ import PrevNext from "@/components/PrevNext";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
-import Clipboard from "clipboard";
+// import Clipboard from "clipboard";
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
-import { markdown } from "@/utils/markdown";
+// import { markdown } from "@/utils/markdown";
 import $ from "jquery";
 import { getArticleDetail } from '../../api/article';
 import dayjs from "dayjs";
@@ -200,7 +200,7 @@ export default {
         title: "Vue3.x-toRefs & shallowReactive & shallowRef & shallowReadonly",
         updateTime: 1611739813,
         views: 5,
-        _id: "6011325cc4ae0128013d3210",
+        id: "6011325cc4ae0128013d3210",
       },
       next: {
         categories: "技术",
@@ -275,31 +275,13 @@ export default {
       ],
     };
   },
-  computed: {},
   mounted() {
     getArticleDetail(this.$route.query.id).then((res) => {
       console.log("res", res);
-      // 格式化时间
       res.data.updateTime = dayjs(res.data.updateTime).format("YYYY-MM-DD HH:mm:ss")
-      res.data.content = markdown(mavonEditor, res.data.content);
       res.data.tags = res.data.tags.split(",");
       this.info = res.data;
-      // this.article = res.data.data;
-      // this.content = markdown(mavonEditor, this.article.content);
-      // this.toc = this.$refs.mavonEditor.$refs.toc.toc;
-      // this.$nextTick(() => {
-      //   const aArr = $(".v-note-wrapper .v-note-panel .v-note-navigation a");
-      //   aArr.each((index, item) => {
-      //     $(item).attr("target", "_blank");
-      //   });
-      // });
-    });
-    this.content = markdown(
-      mavonEditor,
-      "在前端开发中， html 转 pdf 是最常见的需求，实现这块需求的开发[html2canvas](http://html2canvas.hertzen.com/)和 [jspdf](http://mozilla.github.io/pdf.js/getting_started/) 是最常用的两个插件，插件都是现成的。\n### 1.安装\n### 2.使用 \n ```js \n console.log(123); \n```"
-    );
-
-    this.$nextTick(() => {
+      this.$nextTick(() => {
       const aArr = $(
         ".v-note-wrapper .v-note-panel .v-note-navigation-wrapper .v-note-navigation-content a"
       ).toArray();
@@ -317,17 +299,18 @@ export default {
       });
       this.toc = toc;
     });
-
-    this.$nextTick(() => {
-      this.clipboard = new Clipboard(".copy-btn");
-      // 复制成功失败的提示
-      this.clipboard.on("success", () => {
-        this.$toast.success("复制成功");
-      });
-      this.clipboard.on("error", () => {
-        this.$toast.error("复制失败");
-      });
     });
+
+    // this.$nextTick(() => {
+    //   this.clipboard = new Clipboard(".copy-btn");
+    //   // 复制成功失败的提示
+    //   this.clipboard.on("success", () => {
+    //     this.$toast.success("复制成功");
+    //   });
+    //   this.clipboard.on("error", () => {
+    //     this.$toast.error("复制失败");
+    //   });
+    // });
 
     this.commentList = this.listToTree(this.commentList);
     console.log(this.commentList);
@@ -344,7 +327,7 @@ export default {
     },
     listToTree(list) {
       let info = list.reduce(
-        (map, node) => ((map[node._id] = node), (node.children = []), map),
+        (map, node) => ((map[node.id] = node), (node.children = []), map),
         {}
       );
       return list.filter((node) => {

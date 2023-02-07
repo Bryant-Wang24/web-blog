@@ -9,9 +9,9 @@ export function getArticleList(page = 1,pageSize = 20,) {
 }
 
 // 获取文章详情
-export function getArticleDetail(id) {
+export function getArticleDetail(id,from = 'web') {
     return service.request({
         method: "get",
-        url: `/articles/${id}/edit`,
+        url: `/articles/${id}/edit?type=${from}`,
     });
 }
