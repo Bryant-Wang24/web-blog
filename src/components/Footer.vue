@@ -2,7 +2,7 @@
   <div class="footer" :class="{ 'fixed-footer': fixed }">
     <div class="copyright">
       <a target="_blank" href="http://beian.miit.gov.cn"
-        >Copyright © 2020 NeverGiveUpT・蜀ICP备2020026338号</a
+        >Copyright © 2020 王秋爽・鄂ICP备2022019517号</a
       >
     </div>
     <div>本系统由Vue+Muse-UI提供技术支持</div>
