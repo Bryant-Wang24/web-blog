@@ -1,10 +1,10 @@
 import service from "./request";
 
 // 获取文章列表
-export function getArticleList() {
+export function getArticleList(page = 1,pageSize = 20,) {
     return service.request({
         method: "get",
-        url: "/articles",
+        url: `/articles?page=${page}&pageSize=${pageSize}`,
     });
 }
 

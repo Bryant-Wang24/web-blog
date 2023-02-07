@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       page: 1,
-      pageSize: 10,
+      pageSize: 20,
       info: {
         page: 1,
         pageSize: 10,
@@ -153,23 +153,34 @@ export default {
     };
   },
   mounted() {
-    getArticleList ().then((res) => {
-      if(res.code === 0) {
-        // 格式化时间
-        res.data.list.forEach((item) => {
-          item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss");
-          // tags转数组
-          item.tags = item.tags.split(",");
-        });
-        this.info = res.data;
-      }
-    });
+    this.fetchArticles();
+  },
+  // page变化，重新获取数据，刷新页面
+  watch: {
+    page() {
+      this.fetchArticles();
+    },
   },
   methods: {
     goDetail(id) {
       this.$router.push({
         name: "articlesDetails",
         query: { id: id },
+      });
+    },
+    pageChange(page) {
+      this.page = page;
+    },
+    
+    fetchArticles() {
+      getArticleList (this.page,this.pageSize).then((res) => {
+        if(res.code === 0) {
+          res.data.list.forEach((item) => {
+            item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss");
+            item.tags = item.tags.split(",");
+          });
+          this.info = res.data;
+        }
       });
     },
   },
