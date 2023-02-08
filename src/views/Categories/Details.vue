@@ -14,11 +14,15 @@
     <div class="content">
       <mu-paper v-if="isPC" :z-depth="5" class="pc-box">
         <mu-list>
-          <div class="sub-title">分类-技术(100)</div>
-          <mu-list-item button>
+          <div class="sub-title">分类-{{categoryName}}({{ total }})</div>
+          <mu-list-item button
+            v-for="(item, index) in list"
+            :key="index"
+            @click="goDetail(item.id)"
+          >
             <mu-list-item-title class="item">
-              <span class="title">文章标题</span>
-              <span>2021-02-04 09:57</span>
+              <span class="title">{{ item.title }}</span>
+              <span>{{ item.updateTime }}</span>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -35,12 +39,16 @@
       </mu-paper>
 
       <div class="wap-box" v-else>
-        <div class="sub-title">分类-技术(100)</div>
+        <div class="sub-title">分类-{{categoryName}}({{ total }})</div>
         <mu-list>
-          <mu-list-item button>
+          <mu-list-item button
+            v-for="(item, index) in list"
+            :key="index"
+            @click="goDetail(item.id)"
+          >
             <mu-list-item-title class="item">
-              <span class="title">文章标题</span>
-              <span>2021-02-04 09:57</span>
+              <span class="title">{{ item.title }}</span>
+              <span>{{ item.updateTime }}</span>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -63,7 +71,8 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
+import { getArticleList } from "../../api/article";
+import dayjs from 'dayjs';
 export default {
   name: "categoriesDetails",
   components: {
@@ -74,6 +83,8 @@ export default {
     return {
       page: 1,
       pageSize: this.isPC ? 10 : 15,
+      total: 0,
+      categoryName: "",
       list: [],
       info: {
         list: [],
@@ -81,8 +92,26 @@ export default {
       categoriesDetailBgImg: "http://nevergiveupt.top/category.jpg",
     };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.categoryName = this.$route.query.name;
+    getArticleList( this.categoryName, this.page, this.pageSize ).then((res)=>{
+      console.log("res", res)
+      this.list = res.data.list;
+      // 格式化时间
+      this.list.forEach((item) => {
+        item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
+      });
+      this.total = res.data.totalCount;
+    });
+  },
+  methods: {
+    goDetail(id) {
+      this.$router.push({
+        name: "articlesDetails",
+        query: { id: id },
+      });
+    },
+  },
 };
 </script>
 <style lang="less" scoped>

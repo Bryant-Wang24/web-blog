@@ -13,7 +13,11 @@
 
     <div :class="isPC ? 'content' : 'wap-content'">
       <div class="cols">
-        <div class="cols-item">
+        <div class="cols-item" 
+          v-for="(item, index) in categories"
+          :key="index"
+          @click="goDetail(item.name)"
+        >
           <div class="container">
             <div
               class="front"
@@ -22,8 +26,8 @@
               }"
             >
               <div class="inner">
-                <p>技术</p>
-                <span>100</span>
+                <p>{{ item.name }}</p>
+                <span>{{ item.articleNum }}</span>
               </div>
             </div>
             <div
@@ -33,89 +37,8 @@
               }"
             >
               <div class="inner">
-                <p>技术</p>
-                <span>100</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cols-item">
-          <div class="container">
-            <div
-              class="front"
-              :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/3.png)`,
-              }"
-            >
-              <div class="inner">
-                <p>生活</p>
-                <span>100</span>
-              </div>
-            </div>
-            <div
-              class="back"
-              :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/3.png)`,
-              }"
-            >
-              <div class="inner">
-                <p>生活</p>
-                <span>100</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cols-item">
-          <div class="container">
-            <div
-              class="front"
-              :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/4.png)`,
-              }"
-            >
-              <div class="inner">
-                <p>照片</p>
-                <span>100</span>
-              </div>
-            </div>
-            <div
-              class="back"
-              :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/4.png)`,
-              }"
-            >
-              <div class="inner">
-                <p>照片</p>
-                <span>100</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cols-item">
-          <div class="container">
-            <div
-              class="front"
-              :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/5.png)`,
-              }"
-            >
-              <div class="inner">
-                <p>其他</p>
-                <span>100</span>
-              </div>
-            </div>
-            <div
-              class="back"
-              :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/5.png)`,
-              }"
-            >
-              <div class="inner">
-                <p>其他</p>
-                <span>100</span>
+                <p>{{ item.name }}</p>
+                <span>{{ item.articleNum }}</span>
               </div>
             </div>
           </div>
@@ -128,6 +51,7 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { getCategoryList } from "../../api/categories";
 
 export default {
   name: "categories",
@@ -138,11 +62,25 @@ export default {
   data() {
     return {
       categories: [],
-      categoriesBgImg: "http://nevergiveupt.top/category.jpg",
+      categoriesBgImg: "http://nevergiveupt.top/archive.jpg",
     };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getCategories();
+  },
+  methods: {
+    goDetail(name) {
+      this.$router.push({
+        name: "categoriesDetails",
+        query: { name: name },
+      });
+    },
+    async getCategories() {
+      const res = await getCategoryList();
+      this.categories = res.data.list;
+      console.log(this.categories);
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
