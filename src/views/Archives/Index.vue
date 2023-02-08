@@ -9,63 +9,28 @@
     <Header :light-index="2" background="transparent"></Header>
 
     <div class="content">
-      <ul class="timeline timeline-centered">
+      <ul class="timeline timeline-centered" 
+        v-for="(item, index) in list"
+        :key="index"
+      >
         <li class="timeline-item period">
           <div class="timeline-info"></div>
           <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <h2 class="timeline-title">2021</h2>
+            <h2 class="timeline-title">{{ item.year }}</h2>
           </div>
         </li>
-        <li class="timeline-item">
+        <li class="timeline-item"
+          v-for="(item, index) in item.articles"
+          :key="index"
+        >
           <div class="timeline-info">
-            <span>08-15</span>
+            <span>{{ item.monthDay }}</span>
           </div>
           <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <h3 class="timeline-title">如何高效学习Vue</h3>
-            <p>如何高效学习Vue如何高效学习Vue</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-info">
-            <span>08-14</span>
-          </div>
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">如何高效学习React</h3>
-            <p>如何高效学习React如何高效学习React</p>
-          </div>
-        </li>
-      </ul>
-
-      <ul class="timeline timeline-centered">
-        <li class="timeline-item period">
-          <div class="timeline-info"></div>
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h2 class="timeline-title">2020</h2>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <div class="timeline-info">
-            <span>05-20</span>
-          </div>
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">如何高效学习Node.js</h3>
-            <p>如何高效学习Node.js如何高效学习Node.js</p>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <div class="timeline-info">
-            <span>05-12</span>
-          </div>
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">如何高效学习Egg.js</h3>
-            <p>如何高效学习Egg.js如何高效学习Egg.js</p>
+            <h3 class="timeline-title">{{ item.title }}</h3>
+            <p>{{ item.introduction }}</p>
           </div>
         </li>
       </ul>
@@ -76,6 +41,8 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import dayjs from "dayjs";
+import { getArticleList } from "@/api/article";
 
 export default {
   name: "archive",
@@ -89,8 +56,49 @@ export default {
       archiveBgImg: "http://nevergiveupt.top/archive.jpg",
     };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.fetchArticles();
+  },
+  methods: {
+    fetchArticles() {
+      getArticleList (1,9999).then((res) => {
+        if(res.code === 0) {
+          this.list = res.data.list.map((item) => {
+            return {
+              title : item.title,
+              introduction : item.introduction,
+              updateTime : dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss"),
+              year : dayjs(item.updateTime).format("YYYY"),
+              monthDay : dayjs(item.updateTime).format("MM-DD"),
+            };
+          })
+          // 把数据按照年份分组,按照时间降序排列
+          const group = this.list.reduce((acc, cur) => {
+            const year = cur.year;
+            delete cur.year;
+            if (!acc[year]) {
+              acc[year] = [];
+            }
+            acc[year].push(cur);
+            return acc;
+          }, {});
+          this.list = Object.keys(group).map((key) => {
+            return {
+              year: key,
+              articles: group[key].sort((a, b) => {
+                return new Date(b.updateTime) - new Date(a.updateTime);
+              }),
+            };
+          });
+          this.list.sort((a, b) => {
+            return b.year - a.year;
+          });
+          console.log("this.list",this.list)
+
+        }
+      });
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
