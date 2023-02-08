@@ -23,6 +23,7 @@
         <li class="timeline-item"
           v-for="(item, index) in item.articles"
           :key="index"
+          @click="goDetail(item.id)"
         >
           <div class="timeline-info">
             <span>{{ item.monthDay }}</span>
@@ -60,11 +61,18 @@ export default {
     this.fetchArticles();
   },
   methods: {
+    goDetail(id) {
+      this.$router.push({
+        name: "articlesDetails",
+        query: { id: id },
+      });
+    },
     fetchArticles() {
       getArticleList (1,9999).then((res) => {
         if(res.code === 0) {
           this.list = res.data.list.map((item) => {
             return {
+              id: item.id,
               title : item.title,
               introduction : item.introduction,
               updateTime : dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss"),
