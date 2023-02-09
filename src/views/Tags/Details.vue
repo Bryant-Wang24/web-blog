@@ -14,11 +14,15 @@
     <div class="content">
       <mu-paper v-if="isPC" :z-depth="5" class="pc-box">
         <mu-list>
-          <div class="sub-title">标签-Vue(100)</div>
-          <mu-list-item button>
+          <div class="sub-title">标签-{{tagName}}({{ total }})</div>
+          <mu-list-item button
+            v-for="(item, index) in list"
+            :key="index"
+            @click="goDetail(item.id)"
+          >
             <mu-list-item-title class="item">
-              <span class="title">文章标题</span>
-              <span>2021-02-04 09:57</span>
+              <span class="title">{{ item.title }}</span>
+              <span>{{ item.updateTime }}</span>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -27,20 +31,25 @@
           <mu-pagination
             raised
             circle
-            :total="100"
+            :total="total"
             :current.sync="page"
             :pageSize.sync="pageSize"
+            @change="changePage"
           ></mu-pagination>
         </div>
       </mu-paper>
 
       <div class="wap-box" v-else>
-        <div class="sub-title">标签-Vue(100)</div>
+        <div class="sub-title">标签-{{tagName}}({{ total }})</div>
         <mu-list>
-          <mu-list-item button>
+          <mu-list-item button
+            v-for="(item, index) in list"
+            :key="index"
+            @click="goDetail(item.id)"
+          >
             <mu-list-item-title class="item">
-              <span class="title">文章标题</span>
-              <span>2021-02-04 09:57</span>
+              <span class="title">{{ item.title }}</span>
+              <span>{{ item.updateTime }}</span>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -63,7 +72,8 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
+import { getArticleList } from "../../api/article";
+import dayjs from "dayjs";
 export default {
   name: "tagsDetails",
   components: {
@@ -74,15 +84,44 @@ export default {
     return {
       page: 1,
       pageSize: this.isPC ? 10 : 15,
+      tagName:"",
+      total: 0,
       list: [],
       info: {
         list: [],
       },
-      tagsDetailBgImg: "http://nevergiveupt.top/tags.jpg",
+      tagsDetailBgImg: "http://nevergiveupt.top/archive.jpg",
     };
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getArticleList();
+  },
+  methods: {
+    changePage(page) {
+      this.page = page;
+      this.getArticleList();
+    },
+    goDetail(id) {
+      this.$router.push({
+        name: "articlesDetails",
+        query: { id: id },
+      });
+    },
+    getArticleList(){
+      this.tagName = this.$route.query.name;
+      getArticleList( this.page, this.pageSize,"",this.tagName ).then((res)=>{
+        console.log("res", res)
+        if(res.code===0){
+          this.list = res.data.list;
+          // 格式化时间
+          this.list.forEach((item) => {
+            item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
+          });
+          this.total = res.data.totalCount;
+        }
+      });
+    }
+  },
 };
 </script>
 <style lang="less" scoped>

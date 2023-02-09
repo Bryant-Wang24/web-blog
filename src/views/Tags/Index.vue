@@ -11,7 +11,9 @@
 
     <div class="content">
       <div class="tags-wap tagcloud" :style="{ width: isPC ? '70%' : '100%' }">
-        <a v-for="(item, index) in tags" :key="index">
+        <a v-for="(item, index) in tags" :key="index"
+          @click="goDetail(item.name)"
+        >
           <mu-chip v-if="item.articleNum > 0" class="tag" :color="item.color"
             >{{ item.name }}({{ item.articleNum }})</mu-chip
           >
@@ -25,6 +27,7 @@
 import { randomColor } from "@/utils";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { getTagList } from "../../api/tag";
 
 export default {
   name: "tags",
@@ -34,22 +37,14 @@ export default {
   },
   data() {
     return {
-      tags: [
-        {
-          name: "Vue",
-          articleNum: 10,
-          color: randomColor(),
-        },
-        {
-          name: "React",
-          articleNum: 20,
-          color: randomColor(),
-        },
-      ],
-      tagsBgImg: "http://nevergiveupt.top/tags.jpg",
+      tags: [],
+      tagsBgImg: "http://nevergiveupt.top/archive.jpg",
     };
   },
-  mounted() {
+  created() {
+    this.getTagList();
+  },
+  updated() {
     window.tagcloud({
       selector: ".tagcloud", //元素选择器
       fontsize: 16, //基本字体大小, 单位px
@@ -60,7 +55,27 @@ export default {
       keep: false, //鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
     });
   },
-  methods: {},
+  methods: {
+    // 获取标签列表
+    async getTagList(){
+      const res = await getTagList();
+      if(res.code === 0){
+        this.tags = res.data.list.map(item => {
+          return {
+            name: item.name,
+            articleNum: item.articleNum,
+            color: randomColor(),
+          }
+        })
+      }
+    },
+    goDetail(name) {
+      this.$router.push({
+        name: "tagsDetails",
+        query: { name: name },
+      });
+    },
+  },
 };
 </script>
 <style lang="less" scoped>

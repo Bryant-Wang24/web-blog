@@ -112,12 +112,14 @@ export default {
       this.categoryName = this.$route.query.name;
       getArticleList( this.page, this.pageSize,this.categoryName ).then((res)=>{
         console.log("res", res)
-        this.list = res.data.list;
-        // 格式化时间
-        this.list.forEach((item) => {
-          item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
-        });
-        this.total = res.data.totalCount;
+        if(res.code===0){
+          this.list = res.data.list;
+          // 格式化时间
+          this.list.forEach((item) => {
+            item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
+          });
+          this.total = res.data.totalCount;
+        }
       });
     }
   },
