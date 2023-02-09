@@ -1,7 +1,7 @@
 import service from "./request";
 
 // 获取文章列表
-export function getArticleList(categories, page = 1,pageSize = 20,) {
+export function getArticleList(page = 1,pageSize = 20,categories = '') {
     return service.request({
         method: "get",
         url: `/articles?page=${page}&pageSize=${pageSize}&categories=${categories}`,

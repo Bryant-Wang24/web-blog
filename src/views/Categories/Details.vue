@@ -31,9 +31,10 @@
           <mu-pagination
             raised
             circle
-            :total="100"
+            :total="total"
             :current.sync="page"
             :pageSize.sync="pageSize"
+            @change="changePage"
           ></mu-pagination>
         </div>
       </mu-paper>
@@ -85,32 +86,40 @@ export default {
       pageSize: this.isPC ? 10 : 15,
       total: 0,
       categoryName: "",
-      list: [],
+      list: [
+      ],
       info: {
         list: [],
       },
-      categoriesDetailBgImg: "http://nevergiveupt.top/category.jpg",
+      categoriesDetailBgImg: "http://nevergiveupt.top/archive.jpg",
     };
   },
   mounted() {
-    this.categoryName = this.$route.query.name;
-    getArticleList( this.categoryName, this.page, this.pageSize ).then((res)=>{
-      console.log("res", res)
-      this.list = res.data.list;
-      // 格式化时间
-      this.list.forEach((item) => {
-        item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
-      });
-      this.total = res.data.totalCount;
-    });
+    this.getArticleList();
   },
   methods: {
+    changePage(page) {
+      this.page = page;
+      this.getArticleList();
+    },
     goDetail(id) {
       this.$router.push({
         name: "articlesDetails",
         query: { id: id },
       });
     },
+    getArticleList(){
+      this.categoryName = this.$route.query.name;
+      getArticleList( this.page, this.pageSize,this.categoryName ).then((res)=>{
+        console.log("res", res)
+        this.list = res.data.list;
+        // 格式化时间
+        this.list.forEach((item) => {
+          item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
+        });
+        this.total = res.data.totalCount;
+      });
+    }
   },
 };
 </script>

@@ -29,8 +29,8 @@ export default {
   data() {
     return {
       info: {
-        introduction: "",
-        introductionTarget: "There is a kind of call to eat together.",
+        introduction: "王秋爽",
+        introductionTarget: "专注于Golang开发，在前端方面也有开发经验",
       },
     };
   },

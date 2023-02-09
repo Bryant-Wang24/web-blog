@@ -156,11 +156,11 @@ export default {
     this.fetchArticles();
   },
   // page变化，重新获取数据，刷新页面
-  watch: {
-    page() {
-      this.fetchArticles();
-    },
-  },
+  // watch: {
+  //   page() {
+  //     this.fetchArticles();
+  //   },
+  // },
   methods: {
     goDetail(id) {
       this.$router.push({
@@ -170,6 +170,7 @@ export default {
     },
     pageChange(page) {
       this.page = page;
+      this.fetchArticles();
     },
     
     fetchArticles() {
