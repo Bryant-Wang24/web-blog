@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from './admin'
+import {Toast} from 'vant'
 
 //  创建axios实例
 const service = axios.create({
@@ -13,6 +14,10 @@ const service = axios.create({
 //  请求拦截器
 service.interceptors.request.use(
     config => {
+        Toast.loading({
+            message: '加载中...',
+            forbidClick: true,
+        });
         return config
     },
     error => {
@@ -36,6 +41,9 @@ service.interceptors.response.use(
                 // 刷新页面
                 window.location.reload()
             })
+        }
+        if (response.data.code===0){
+            Toast.clear()
         }
         return response.data
     },
