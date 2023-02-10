@@ -43,9 +43,9 @@
               :title="info.title"
               :sub-title="info.introduction"
             ></mu-card-title>
-            <mu-card-media :style="{ height: isPC ? '400px' : 'auto' }">
+            <!-- <mu-card-media :style="{ height: isPC ? '400px' : 'auto' }">
               <img v-lazy="info.cover" style="height: 100%" />
-            </mu-card-media>
+            </mu-card-media> -->
             <mu-card-actions class="sub-title">
               <mu-button class="cursor-default" flat color="warning"
                 >字数({{ info.content.length }})</mu-button

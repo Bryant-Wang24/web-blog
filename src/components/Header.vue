@@ -4,9 +4,9 @@
       <!-- title -->
       <span style="cursor: pointer">王秋爽</span>
 
-      <mu-avatar slot="left" class="header-avatar" :size="50">
+      <!-- <mu-avatar slot="left" class="header-avatar" :size="50">
         <img src="../assets/wqs.jpg" />
-      </mu-avatar>
+      </mu-avatar> -->
 
       <!-- 菜单 -->
       <mu-button
@@ -83,7 +83,7 @@
           <!-- <mu-icon value="expand_more"></mu-icon> -->
         </div>
       </mu-button>
-      <!-- <mu-popover :open.sync="openUser" :trigger="trigger">
+      <mu-popover :open.sync="openUser" :trigger="trigger">
         <mu-list>
           <mu-list-item button>
             <mu-list-item-title>个人中心</mu-list-item-title>
@@ -92,7 +92,7 @@
             <mu-list-item-title>退出登录</mu-list-item-title>
           </mu-list-item>
         </mu-list>
-      </mu-popover> -->
+      </mu-popover>
     </mu-appbar>
 
     <!-- 搜索按钮 -->
