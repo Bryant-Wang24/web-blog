@@ -86,8 +86,7 @@ export default {
       pageSize: this.isPC ? 10 : 15,
       total: 0,
       categoryName: "",
-      list: [
-      ],
+      list: [],
       info: {
         list: [],
       },

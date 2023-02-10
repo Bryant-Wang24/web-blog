@@ -26,9 +26,9 @@
               <mu-button class="cursor-default" flat color="error"
                 >评论({{item.comment}})</mu-button
               >
-              <mu-button class="cursor-default" flat color="primary"
+              <!-- <mu-button class="cursor-default" flat color="primary"
                 >点赞({{item.like}})</mu-button
-              >
+              > -->
               <mu-button class="cursor-default" flat color="#9e9e9e"
                 >{{item.updateTime}}</mu-button
               >

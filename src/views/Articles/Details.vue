@@ -12,7 +12,7 @@
         </div>
       </mu-card>
       <div class="action" :class="toc.length > 0 ? '' : 'noMulu'">
-        <mu-tooltip placement="top" content="点赞">
+        <!-- <mu-tooltip placement="top" content="点赞">
           <mu-button fab color="primary">
             <mu-icon value="thumb_up"></mu-icon>
           </mu-button>
@@ -22,7 +22,7 @@
           <mu-button fab color="purple500">
             <mu-icon value="grade"></mu-icon>
           </mu-button>
-        </mu-tooltip>
+        </mu-tooltip> -->
 
         <mu-tooltip placement="top" content="评论">
           <mu-button @click="scrollToPosition('#comment')"  fab color="red">
@@ -59,9 +59,9 @@
               <mu-button class="cursor-default" flat color="error"
                 >评论({{ info.comment }})</mu-button
               >
-              <mu-button class="cursor-default" flat color="primary"
+              <!-- <mu-button class="cursor-default" flat color="primary"
                 >点赞({{ info.like }})</mu-button
-              >
+              > -->
               <mu-button class="cursor-default" flat color="#9e9e9e"
                 >{{ info.updateTime }}</mu-button
               >
@@ -101,7 +101,7 @@
             </mu-card-actions>
           </mu-card>
 
-          <div class="action-list">
+          <!-- <div class="action-list">
             <mu-tooltip placement="top" content="点赞">
               <mu-button fab color="primary">
                 <mu-icon value="thumb_up"></mu-icon>
@@ -113,7 +113,7 @@
                 <mu-icon value="grade"></mu-icon>
               </mu-button>
             </mu-tooltip>
-          </div>
+          </div> -->
 
           <mu-card id="comment" class="card">
             <Comment
@@ -133,7 +133,7 @@
             ></CommentList>
           </mu-card>
 
-          <prev-next :prev="prev" :next="next"></prev-next>
+          <!-- <prev-next :prev="prev" :next="next"></prev-next> -->
         </div>
       </div>
     </div>
@@ -145,7 +145,7 @@
 import RightConfig from "@/components/RightConfig";
 import Comment from "@/components/Comment";
 import CommentList from "@/components/CommentList";
-import PrevNext from "@/components/PrevNext";
+// import PrevNext from "@/components/PrevNext";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -167,7 +167,7 @@ export default {
     Header,
     mavonEditor,
     CommentList,
-    PrevNext,
+    // PrevNext,
   },
   data() {
     return {
@@ -176,55 +176,6 @@ export default {
         title: "使用jspdf+canvas2html将网页保存为pdf文件",
         introduction: "简介",
         cover: "http://nevergiveupt.top/canvas/html2canvas.png",
-      },
-
-      prev: {
-        categories: "技术",
-        collect: 0,
-        comment: 0,
-        content:
-          "### 1.toRefs↵把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref↵↵`应用`: ",
-        cover: "http://nevergiveupt.top/vue/vue_composition_api.jpeg",
-        createTime: 1611739740,
-        introduction:
-          "toRefs把一个响应式对象转换成普通对象，该普通对象的每个 property 都是一个 ref ，和响应式对象 property 一一对应。",
-        isCollect: true,
-        isComment: true,
-        isLike: true,
-        isReward: false,
-        like: 0,
-        publishStatus: 1,
-        sort: 0,
-        status: 1,
-        tags: ["Vue"],
-        title: "Vue3.x-toRefs & shallowReactive & shallowRef & shallowReadonly",
-        updateTime: 1611739813,
-        views: 5,
-        id: "6011325cc4ae0128013d3210",
-      },
-      next: {
-        categories: "技术",
-        collect: 0,
-        comment: 0,
-        content:
-          "### 1.注册GitHub账号并创建一个OAuth Apps↵↵​登录GitHub账号然后右上角找到你的头像点击",
-        cover: "http://nevergiveupt.top/egg/github_signin.png",
-        createTime: 1612341189,
-        introduction:
-          "『登录鉴权』 是一个常见的业务场景，包括『账号密码登录方式』和『第三方统一登录』。其中，后者我们经常使用到，如 Google， GitHub，QQ 统一登录，它们都是基于 OAuth 规范。",
-        isCollect: true,
-        isComment: true,
-        isLike: true,
-        isReward: true,
-        like: 1,
-        publishStatus: 1,
-        sort: 0,
-        status: 1,
-        tags: ["Node.js", "Egg"],
-        title: "使用Egg通过GitHub来实现用户登录",
-        updateTime: 1612341807,
-        views: 6,
-        _id: "601a5fc5e268db458626523d",
       },
       content: "",
       toc: [],
