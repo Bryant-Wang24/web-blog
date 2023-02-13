@@ -3,7 +3,7 @@
     <mu-appbar :color="background">
       <!-- title -->
       <span style="cursor: pointer">王秋爽</span>
-
+      <span class="sentence">--------&nbsp; {{ sentence }}</span>
       <!-- <mu-avatar slot="left" class="header-avatar" :size="50">
         <img src="../assets/wqs.jpg" />
       </mu-avatar> -->
@@ -179,6 +179,7 @@
 import RegisterForm from "@/components/RegisterForm";
 import LoginForm from "@/components/LoginForm";
 import SearchForm from "@/components/SearchForm";
+import { getSentence } from "../api/admin";
 
 const menus = [
   {
@@ -240,6 +241,7 @@ export default {
   },
   data() {
     return {
+      sentence: "",
       openUser: false,
       openTheme: false,
       openWapMenu: false,
@@ -265,6 +267,7 @@ export default {
     };
   },
   mounted() {
+    this.getSentence();
     const hours = new Date().getHours();
     let defaultTheme = "";
     if (hours >= 8 && hours <= 18) {
@@ -286,6 +289,11 @@ export default {
     };
   },
   methods: {
+    getSentence(){
+      getSentence().then(res => {
+        this.sentence = res.data.hitokoto
+      });
+    },
     toggleWapMenu(openWapMenu) {
       this.openWapMenu = openWapMenu;
     },
@@ -330,6 +338,14 @@ export default {
   z-index: 1501;
   width: 100%;
   top: 0;
+}
+.header .sentence{
+  // border-top: 1px solid #AAB2BD;
+  // border-bottom: 1px solid #AAB2BD;
+  padding: 7px 100px;
+  margin-left: 70px;
+  font-size: 16px;
+  color: #777d86;
 }
 
 .header-avatar {

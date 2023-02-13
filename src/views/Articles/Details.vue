@@ -181,15 +181,18 @@ export default {
       toc: [],
       commentSuccess: false,
       commentList: [
-        {
-          targetReplayId: "6084ce48e268db458626591a",
-          targetReplayContent: "good",
-          currentReplayContent: "这篇文章写得不错",
-          commentTime: 1623048202,
-          auditTime: 0,
-          auditStatus: "3",
-          _id: "60bdc00ac4b76ef12cd151aa",
-          nickName: "Never",
+      {
+          targetReplayId: "",
+          targetReplayContent: "",
+          currentReplayContent: "good",
+          commentTime: 1619316296,
+          auditTime: 1619316309,
+          auditStatus: "1",
+          _id: "6084ce48e268db458626591a",
+          avatar:
+            "http://img.nevergiveupt.top/78e79747e0658b0d1766c8928d784653.png",
+          email: "1912324677@qq.com",
+          nickName: "永不放弃",
           articleId: "601134b4c4ae0128013d322d",
           articleTitle: "测试评论文章",
         },

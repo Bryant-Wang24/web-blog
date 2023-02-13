@@ -32,6 +32,7 @@
   </div>
 </template>
 <script>
+import { Toast } from 'vant';
 export default {
   props: {
     commentSuccess: {
@@ -54,14 +55,24 @@ export default {
       }
     },
     ok(bool) {
-      if (bool) {
-        this.$emit("comment", {
-          content: this.content,
-        });
-      } else {
+      console.log(bool);
+      // if (bool) {
+      //   this.$emit("comment", {
+      //     content: this.content,
+      //   });
+      // } else {
         this.openAlert = false;
         this.content = "";
-      }
+        Toast.loading({
+          message: "评论中...",
+          forbidClick: true,
+          duration: 0,
+        });
+        setTimeout(() => {
+          Toast.clear();
+          Toast.success("评论成功,请等待审核");
+        }, 1000);
+      // }
     },
   },
   watch: {
