@@ -24,7 +24,8 @@
         </mu-form-item>
       </mu-form>
 
-      <mu-button slot="actions" flat href="/api/v1/web/github/login">
+      <mu-button slot="actions" flat href="https://github.com/login/oauth/authorize?client_id=Iv1.355ecd3abdf8db39&redirect_uri=http://localhost:8081/articles">
+      <!-- <mu-button slot="actions" flat href="api/v1/github/login"> -->
         <mu-avatar style="margin-right:10px" size="30">
           <img :src="Icon.github" alt />
         </mu-avatar>
