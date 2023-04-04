@@ -5,7 +5,7 @@
         <img src="../assets/wqs.jpg" alt />
       </mu-avatar>
       <div class="title">王秋爽</div>
-      <div class="desc">专注于Golang开发，在前端方面也有开发经验</div>
+      <div class="desc">专注于前端开发，也会用go语言写写demo</div>
       <div class="tags">
         <mu-chip class="chip">Golang</mu-chip>
         <!-- <mu-chip class="chip">Vue</mu-chip>
@@ -75,9 +75,9 @@
       </div>
     </mu-card>
 
-    <mu-card class="slider-card card-ad">
+    <!-- <mu-card class="slider-card card-ad">
       <img src="http://www.nevergiveupt.top/qianduanxiaokezhan.png" alt="" />
-    </mu-card>
+    </mu-card> -->
   </div>
 </template>
 <script>

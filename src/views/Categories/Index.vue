@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       categories: [],
-      categoriesBgImg: "http://nevergiveupt.top/archive.jpg",
+      categoriesBgImg: "http://120.79.23.205:8080/logo/archive.jpg",
     };
   },
   mounted() {

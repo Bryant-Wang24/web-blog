@@ -2,14 +2,14 @@
   <div
     class="common"
     :style="{
-      background: `url(${archiveBgImg}) center center no-repeat`,
+      background: `url('../../assets/archive.jpg') center center no-repeat`,
       backgroundSize: 'cover',
     }"
   >
     <Header :light-index="2" background="transparent"></Header>
 
     <div class="content">
-      <ul class="timeline timeline-centered" 
+      <ul class="timeline timeline-centered"
         v-for="(item, index) in list"
         :key="index"
       >
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       list: [],
-      archiveBgImg: "http://nevergiveupt.top/archive.jpg",
+      archiveBgImg: "http://120.79.23.205:8080/logo/wqs.jpg",
     };
   },
   mounted() {

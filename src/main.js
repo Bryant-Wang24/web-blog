@@ -73,7 +73,7 @@ Vue.use(Helpers);
 
 import { isPC } from "@/utils";
 Vue.prototype.isPC = isPC;
-Vue.prototype.avatar = "http://nevergiveupt.top/index.jpg";
+Vue.prototype.avatar = "http://120.79.23.205:8080/logo/index.jpg";
 
 import VueLazyload from "vue-lazyload";
 
@@ -151,7 +151,7 @@ let defaultTheme = "";
 if (hours >= 8 && hours <= 18) {
   defaultTheme = "selfLight";
 } else {
-  defaultTheme = "selfDark";
+  defaultTheme = "selfLight";
 }
 
 const selfTheme = localStorage.getItem("theme") || defaultTheme;

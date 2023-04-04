@@ -90,7 +90,7 @@ export default {
       info: {
         list: [],
       },
-      tagsDetailBgImg: "http://nevergiveupt.top/archive.jpg",
+      tagsDetailBgImg: "http://120.79.23.205:8080/logo/archive.jpg",
     };
   },
   mounted() {
