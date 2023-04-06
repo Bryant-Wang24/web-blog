@@ -87,7 +87,7 @@ export default {
           comment: 0,
           content:
             "### 1.注册GitHub账号并创建一个OAuth Apps↵↵​登录GitHub账号然后右上角找到你的头像点击",
-          cover: "http://nevergiveupt.top/egg/github_signin.png",
+          cover: "https://wangqiushuang.online:8080/logo/github.png",
           createTime: 1612341189,
           introduction:
             "『登录鉴权』 是一个常见的业务场景，包括『账号密码登录方式』和『第三方统一登录』。其中，后者我们经常使用到，如 Google， GitHub，QQ 统一登录，它们都是基于 OAuth 规范。",
@@ -108,7 +108,7 @@ export default {
       ],
       userInfo: {
         avatar:
-          "http://img.nevergiveupt.top/78e79747e0658b0d1766c8928d784653.png",
+          "https://wangqiushuang.online:8080/logo/github.png",
         nickName: "永不放弃",
         email: "1916579055@qq.com",
         introduction:

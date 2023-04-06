@@ -4,9 +4,9 @@
       <!-- title -->
       <span>王秋爽</span>
       <span class="sentence">--------&nbsp; {{ sentence }}</span>
-      <!-- <mu-avatar slot="left" class="header-avatar" :size="50">
-        <img src="../assets/wqs.jpg" />
-      </mu-avatar> -->
+      <mu-avatar style="cursor: default;" slot="left" class="header-avatar" :size="50">
+        <img src="https://wangqiushuang.online:8080/logo/wqs.jpg" />
+      </mu-avatar>
 
       <!-- 菜单 -->
       <mu-button

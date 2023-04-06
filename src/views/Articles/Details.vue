@@ -175,7 +175,7 @@ export default {
         id: "601134b4c4ae0128013d322d",
         title: "使用jspdf+canvas2html将网页保存为pdf文件",
         introduction: "简介",
-        cover: "http://nevergiveupt.top/canvas/html2canvas.png",
+        cover: "https://wangqiushuang.online:8080/logo/github.png",
       },
       content: "",
       toc: [],
@@ -190,7 +190,7 @@ export default {
           auditStatus: "1",
           _id: "6084ce48e268db458626591a",
           avatar:
-            "http://img.nevergiveupt.top/78e79747e0658b0d1766c8928d784653.png",
+            "https://wangqiushuang.online:8080/logo/github.png",
           email: "1912324677@qq.com",
           nickName: "永不放弃",
           articleId: "601134b4c4ae0128013d322d",
@@ -205,7 +205,7 @@ export default {
           auditStatus: "1",
           _id: "6084ce48e268db458626591a",
           avatar:
-            "http://img.nevergiveupt.top/78e79747e0658b0d1766c8928d784653.png",
+            "https://wangqiushuang.online:8080/logo/github.png",
           email: "1912324677@qq.com",
           nickName: "永不放弃",
           articleId: "601134b4c4ae0128013d322d",
@@ -220,7 +220,7 @@ export default {
           auditStatus: "1",
           _id: "6011485dc4ae0128013d3246",
           avatar:
-            "http://img.nevergiveupt.top/78e79747e0658b0d1766c8928d784653.png",
+            "https://wangqiushuang.online:8080/logo/github.png",
           email: "1912324677@qq.com",
           nickName: "永不放弃",
           articleId: "601134b4c4ae0128013d322d",

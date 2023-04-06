@@ -7,11 +7,11 @@
         </h2>
         <div>
           <div class="float-left">
-            <img src="http://www.nevergiveupt.top/ds-1.gif" />
+            <img src="https://wangqiushuang.online:8080/logo/ds-1.gif" />
             <div class="alert">{{desc}}</div>
           </div>
           <div class="float-right">
-            <img src="http://www.nevergiveupt.top/ds-2.png" width="260" />
+            <img src="https://wangqiushuang.online:8080/logo/ds-2.png" width="260" />
           </div>
         </div>
         <div class="padding-big">

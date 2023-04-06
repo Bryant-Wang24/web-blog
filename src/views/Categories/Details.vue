@@ -90,7 +90,7 @@ export default {
       info: {
         list: [],
       },
-      categoriesDetailBgImg: "http://nevergiveupt.top/archive.jpg",
+      categoriesDetailBgImg: "https://wangqiushuang.online:8080/logo/archive.jpg",
     };
   },
   mounted() {

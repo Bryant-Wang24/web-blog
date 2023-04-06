@@ -9,7 +9,7 @@
       style="position: fixed; height: 100%; margin-top: 0"
     >
       <mu-carousel-item v-for="item in info.imgs" :key="item.id">
-        <img :src="item.imgUrl" />
+        <img :src="item.imgUrl | 'https://wangqiushuang.online:8080/logo/wqs.jpg'" />
       </mu-carousel-item>
     </mu-carousel>
 

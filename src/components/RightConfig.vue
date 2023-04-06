@@ -2,11 +2,12 @@
   <div class="right-config">
     <mu-card class="slider-card">
       <mu-avatar class="avatar" size="100">
-        <img src="../assets/wqs.jpg" alt />
+        <img src="https://wangqiushuang.online:8080/logo/wqs.jpg" alt />
       </mu-avatar>
       <div class="title">王秋爽</div>
-      <div class="desc">专注于前端开发，也会用go语言写写demo</div>
+      <div class="desc">专注于前端开发，对go语言挺感兴趣，会写写demo</div>
       <div class="tags">
+        <mu-chip class="chip">前端</mu-chip>
         <mu-chip class="chip">Golang</mu-chip>
         <!-- <mu-chip class="chip">Vue</mu-chip>
         <mu-chip class="chip">React</mu-chip> -->
@@ -17,19 +18,14 @@
         <div class="friend-links">
           <mu-button class="link" fab small @click="handleJumpToGithub">
             <mu-avatar size="40">
-              <img src="http://www.nevergiveupt.top/github.png" alt />
+              <img src="https://wangqiushuang.online:8080/logo/github.png" alt />
             </mu-avatar>
           </mu-button>
           <mu-button class="link" fab small @click="handleJumpToZhiHu">
             <mu-avatar size="40">
-              <img src="http://www.nevergiveupt.top/zhihu.jpg" alt />
+              <img src="https://wangqiushuang.online:8080/logo/zhihu.jpg" alt />
             </mu-avatar>
           </mu-button>
-          <!-- <mu-button class="link" fab small>
-            <mu-avatar size="40">
-              <img src="http://www.nevergiveupt.top/zhihu.jpg" alt />
-            </mu-avatar>
-          </mu-button> -->
         </div>
       </div>
     </mu-card>
@@ -75,9 +71,11 @@
       </div>
     </mu-card>
 
-    <!-- <mu-card class="slider-card card-ad">
-      <img src="http://www.nevergiveupt.top/qianduanxiaokezhan.png" alt="" />
-    </mu-card> -->
+    <!-- 广告 -->
+    <mu-card class="slider-card card-ad">
+      广告位
+      <!-- <img src="https://wangqiushuang.online:8080/logo/zhihu.jpg" alt="" /> -->
+    </mu-card>
   </div>
 </template>
 <script>

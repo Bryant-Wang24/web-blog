@@ -303,7 +303,6 @@ export const randomColor = () => {
 };
 
 export const Icon = {
-  github: "http://www.nevergiveupt.top/github.png",
-  sf: "http://www.nevergiveupt.top/sf.jpeg",
-  zhihu: "http://www.nevergiveupt.top/zhihu.jpg",
+  github: "https://wangqiushuang.online:8080/logo/github.png",
+  zhihu: "https://wangqiushuang.online:8080/logo/zhihu.jpg",
 };

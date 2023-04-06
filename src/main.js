@@ -73,14 +73,14 @@ Vue.use(Helpers);
 
 import { isPC } from "@/utils";
 Vue.prototype.isPC = isPC;
-Vue.prototype.avatar = "http://120.79.23.205:8080/logo/index.jpg";
+Vue.prototype.avatar = "https://wangqiushuang.online:8080/logo/index.jpg";
 
 import VueLazyload from "vue-lazyload";
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: "http://www.nevergiveupt.top/loading.gif",
-  loading: "http://www.nevergiveupt.top/loading.gif",
+  error: "https://wangqiushuang.online:8080/logo/loading.gif",
+  loading: "https://wangqiushuang.online:8080/logo/loading.gif",
   attempt: 1,
 });
 

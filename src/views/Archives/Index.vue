@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       list: [],
-      archiveBgImg: "https://wangqiushuang.online:8090/archive.jpg",
+      archiveBgImg: "https://wangqiushuang.online:8080/logo/archive.jpg",
     };
   },
   mounted() {

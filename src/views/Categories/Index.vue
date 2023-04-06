@@ -22,7 +22,7 @@
             <div
               class="front"
               :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/2.png)`,
+                backgroundImage: `url(https://wangqiushuang.online:8080/logo/reverse.png)`,
               }"
             >
               <div class="inner">
@@ -33,7 +33,7 @@
             <div
               class="back"
               :style="{
-                backgroundImage: `url(http://img.nevergiveupt.top/2.png)`,
+                backgroundImage: `url(https://wangqiushuang.online:8080/logo/reverse.png)`,
               }"
             >
               <div class="inner">
@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       categories: [],
-      categoriesBgImg: "https://wangqiushuang.online:8090/archive.jpg",
+      categoriesBgImg: "https://wangqiushuang.online:8080/logo/archive.jpg",
     };
   },
   mounted() {

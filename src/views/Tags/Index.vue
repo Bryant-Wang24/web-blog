@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       tags: [],
-      tagsBgImg: "http://nevergiveupt.top/archive.jpg",
+      tagsBgImg: "https://wangqiushuang.online:8080/logo/archive.jpg",
     };
   },
   created() {
