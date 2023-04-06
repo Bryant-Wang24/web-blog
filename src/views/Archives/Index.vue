@@ -2,7 +2,7 @@
   <div
     class="common"
     :style="{
-      background: `url('../../assets/archive.jpg') center center no-repeat`,
+      background: `url(${archiveBgImg}) center center no-repeat`,
       backgroundSize: 'cover',
     }"
   >
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       list: [],
-      archiveBgImg: "http://120.79.23.205:8080/logo/wqs.jpg",
+      archiveBgImg: "https://wangqiushuang.online:8090/archive.jpg",
     };
   },
   mounted() {

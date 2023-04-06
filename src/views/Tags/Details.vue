@@ -90,7 +90,7 @@ export default {
       info: {
         list: [],
       },
-      tagsDetailBgImg: "http://120.79.23.205:8080/logo/archive.jpg",
+      tagsDetailBgImg: "http://wangqiushuang.online:8090/archive.jpg",
     };
   },
   mounted() {

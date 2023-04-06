@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       categories: [],
-      categoriesBgImg: "http://120.79.23.205:8080/logo/archive.jpg",
+      categoriesBgImg: "https://wangqiushuang.online:8090/archive.jpg",
     };
   },
   mounted() {
