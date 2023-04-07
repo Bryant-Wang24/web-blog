@@ -30,7 +30,7 @@
                 >点赞({{item.like}})</mu-button
               > -->
               <mu-button class="cursor-default" flat color="#9e9e9e"
-                >{{item.updateTime}}</mu-button
+                >{{item.createTime}}</mu-button
               >
             </mu-card-actions>
             <mu-card-text v-if="item.introduction" class="text">简介: {{item.introduction}}</mu-card-text>
@@ -133,7 +133,7 @@ export default {
       getArticleList (this.page,this.pageSize,'','',code).then((res) => {
         if(res.code === 0) {
           res.data.list.forEach((item) => {
-            item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss");
+            item.createTime = dayjs(item.createTime).format("YYYY-MM-DD HH:mm:ss");
             item.tags = item.tags.split(",");
           });
           this.info = res.data;

@@ -342,10 +342,12 @@ export default {
 .header .sentence{
   // border-top: 1px solid #AAB2BD;
   // border-bottom: 1px solid #AAB2BD;
-  padding: 7px 100px;
+  padding: 7px 0px 7px 30px;
   margin-left: 70px;
   font-size: 16px;
-  color: #777d86;
+  @media  (max-width:1000px) {
+    display: none;
+  }
 }
 
 .header-avatar {

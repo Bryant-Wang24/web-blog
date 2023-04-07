@@ -75,9 +75,10 @@ export default {
               id: item.id,
               title : item.title,
               introduction : item.introduction,
-              updateTime : dayjs(item.updateTime).format("YYYY-MM-DD HH:mm:ss"),
-              year : dayjs(item.updateTime).format("YYYY"),
-              monthDay : dayjs(item.updateTime).format("MM-DD"),
+
+              createTime : dayjs(item.createTime).format("YYYY-MM-DD HH:mm:ss"),
+              year : dayjs(item.createTime).format("YYYY"),
+              monthDay : dayjs(item.createTime).format("MM-DD"),
             };
           })
           // 把数据按照年份分组,按照时间降序排列
@@ -94,7 +95,7 @@ export default {
             return {
               year: key,
               articles: group[key].sort((a, b) => {
-                return new Date(b.updateTime) - new Date(a.updateTime);
+                return new Date(b.createTime) - new Date(a.createTime);
               }),
             };
           });

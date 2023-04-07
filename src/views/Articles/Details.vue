@@ -63,7 +63,7 @@
                 >点赞({{ info.like }})</mu-button
               > -->
               <mu-button class="cursor-default" flat color="#9e9e9e"
-                >{{ info.updateTime }}</mu-button
+                >{{ info.createTime }}</mu-button
               >
             </mu-card-actions>
             <mavonEditor
@@ -232,7 +232,7 @@ export default {
   mounted() {
     getArticleDetail(this.$route.query.id).then((res) => {
       console.log("res", res);
-      res.data.updateTime = dayjs(res.data.updateTime).format("YYYY-MM-DD HH:mm:ss")
+      res.data.createTime = dayjs(res.data.createTime).format("YYYY-MM-DD HH:mm:ss")
       res.data.tags = res.data.tags.split(",");
       this.info = res.data;
       this.$nextTick(() => {

@@ -30,7 +30,7 @@ export default {
     return {
       info: {
         introduction: "王秋爽",
-        introductionTarget: "自我介绍：我叫王秋爽，我的爱好是唱，跳，rap，篮球。我的前女友有1.迪丽娜，2.古力热巴，3.马尔扎哈。我学过的编程语言有 JavaScript，golang。",
+        introductionTarget: "自我介绍：我叫王秋爽，我的爱好是唱，跳，rap，篮球。我的前女友有1.迪丽娜扎，2.古力热巴，3.马尔扎哈。我学过的编程语言有 JavaScript，golang。",
       },
     };
   },

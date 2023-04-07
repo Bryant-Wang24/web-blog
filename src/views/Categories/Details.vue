@@ -22,7 +22,7 @@
           >
             <mu-list-item-title class="item">
               <span class="title">{{ item.title }}</span>
-              <span>{{ item.updateTime }}</span>
+              <span>{{ item.createTime }}</span>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -49,7 +49,7 @@
           >
             <mu-list-item-title class="item">
               <span class="title">{{ item.title }}</span>
-              <span>{{ item.updateTime }}</span>
+              <span>{{ item.createTime }}</span>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -115,7 +115,7 @@ export default {
           this.list = res.data.list;
           // 格式化时间
           this.list.forEach((item) => {
-            item.updateTime = dayjs(item.updateTime).format("YYYY-MM-DD HH:mm");
+            item.createTime = dayjs(item.createTime).format("YYYY-MM-DD HH:mm");
           });
           this.total = res.data.totalCount;
         }
