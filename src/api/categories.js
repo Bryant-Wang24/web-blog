@@ -4,6 +4,6 @@ import service from "./request";
 export function getCategoryList() {
     return service.request({
         method: "get",
-        url: "/categories",
+        url: `/categories?from=web`,
     });
 }

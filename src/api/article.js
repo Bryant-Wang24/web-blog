@@ -4,7 +4,7 @@ import service from "./request";
 export function getArticleList(page = 1,pageSize = 20,categories = '',tags = '',code) {
     return service.request({
         method: "get",
-        url: `/articles?page=${page}&pageSize=${pageSize}&categories=${categories}&tags=${tags}&${code ? 'code=' + code : ''}`,
+        url: `/articles?page=${page}&pageSize=${pageSize}&status=1&categories=${categories}&tags=${tags}&${code ? 'code=' + code : ''}`,
     });
 }
 
