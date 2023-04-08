@@ -4,6 +4,6 @@ import service from "./request";
 export function getTagList(page = 1,pageSize = 9999) {
     return service.request({
         method: "get",
-        url: `/tags?page=${page}&pageSize=${pageSize}`,
+        url: `/tags?page=${page}&pageSize=${pageSize}&from=web`,
     });
 }
