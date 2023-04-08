@@ -2,8 +2,8 @@
   <div class="header">
     <mu-appbar :color="background">
       <!-- title -->
-      <span>王秋爽</span>
-      <span class="sentence">--------&nbsp; {{ sentence }}</span>
+      <span class="name">王秋爽</span>
+      <span class="sentence">{{ sentence }}</span>
       <mu-avatar style="cursor: default;" slot="left" class="header-avatar" :size="50">
         <img src="https://wangqiushuang.online:8080/logo/wqs.jpg" />
       </mu-avatar>
@@ -22,7 +22,7 @@
         <mu-icon size="16" :value="item.icon"></mu-icon>
         {{ item.name }}
       </mu-button>
-
+        
       <!-- 菜单图标 -->
       <mu-button v-show="!isPC" @click="toggleWapMenu(true)" icon slot="left">
         <mu-icon value="menu"></mu-icon>
@@ -339,20 +339,33 @@ export default {
   width: 100%;
   top: 0;
 }
+.header .name{
+  margin-right: 30px;
+  @media  (max-width:960px) {
+    display: none!important;
+  }
+}
 .header .sentence{
-  // border-top: 1px solid #AAB2BD;
-  // border-bottom: 1px solid #AAB2BD;
-  padding: 7px 0px 7px 30px;
-  margin-left: 70px;
+  position: absolute;
+  top: 0;
   font-size: 16px;
-  @media  (max-width:1000px) {
-    display: none;
+  overflow-x: auto;
+  @media  (max-width:821px) {
+    font-size: 12px;
+    margin-left: -15px;
+    padding:0px 0px 0px 0px;
+    z-index: 9999;
+    position: absolute;
+    top: 0;
   }
 }
 
 .header-avatar {
   margin-left: 20px;
   cursor: pointer;
+  @media  (max-width:500px) {
+    display: none;
+  }
 }
 
 .mu-appbar {
