@@ -10,12 +10,12 @@
       :open.sync="open"
     >
       <mu-form ref="form" :model="validateForm">
-        <!-- <mu-form-item label="Email（必填）" prop="email" :rules="emailRules">
+        <mu-form-item label="Email（必填）" prop="email" :rules="emailRules">
           <mu-text-field
             v-model.trim="validateForm.email"
             prop="email"
           ></mu-text-field>
-        </mu-form-item> -->
+        </mu-form-item>
 
         <mu-form-item label="昵称" prop="nickName" :rules="nickNameRules">
           <mu-text-field
@@ -74,11 +74,11 @@
           ></mu-text-field>
         </mu-form-item> -->
       </mu-form>
-      <!-- <mu-button slot="actions" flat href="/api/v1/web/github/login">
+      <mu-button slot="actions" flat href="/api/v1/web/github/login">
         <mu-avatar style="margin-right: 10px" size="30">
           <img :src="Icon.github" alt /> </mu-avatar
         >Github
-      </mu-button> -->
+      </mu-button>
       <mu-button slot="actions" flat small @click="clear">取消</mu-button>
       <mu-button slot="actions" flat small color="primary" @click="submit"
         >注册</mu-button
@@ -101,17 +101,17 @@ export default {
     return {
       Icon,
       visibility: false,
-      captcha: "",
-      // emailRules: [
-      //   { validate: (val) => !!val, message: "邮箱必填！" },
-      //   {
-      //     validate: (val) => {
-      //       let reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-      //       return reg.test(val);
-      //     },
-      //     message: "邮箱格式错误！",
-      //   },
-      // ],
+      // captcha: "",
+      emailRules: [
+        { validate: (val) => !!val, message: "邮箱必填！" },
+        {
+          validate: (val) => {
+            let reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            return reg.test(val);
+          },
+          message: "邮箱格式错误！",
+        },
+      ],
       nickNameRules: [
         { validate: (val) => val.length <= 20, message: "昵称最大20个字符！" },
       ],
@@ -142,7 +142,7 @@ export default {
       //   },
       // ],
       validateForm: {
-        // email: "",
+        email: "",
         nickName: "",
         password: "",
         confirmPassword: "",
@@ -167,14 +167,14 @@ export default {
             username: this.validateForm.nickName,
             password: this.validateForm.password,
           });
+          console.log("res",res)
+          
           if (res.data) {
             localStorage.setItem("user", JSON.stringify(res.data));
-            // this.$toast.success("注册成功");
             Toast.success("注册成功");
-            // location.reload();
+            location.reload();
             this.$emit("toggle", false);
           } else {
-            // this.$toast.error(res.msg);
             Toast.fail(res.msg);
             // this.getCaptcha();
           }
@@ -188,19 +188,19 @@ export default {
         nickName: "",
         password: "",
         confirmPassword: "",
-        introduction: "",
-        captcha: "",
+        // introduction: "",
+        // captcha: "",
       };
       this.$emit("toggle", false);
     },
   },
-  watch: {
-    open(newVal) {
-      if (newVal) {
-        // this.getCaptcha();
-      }
-    },
-  },
+  // watch: {
+  //   open(newVal) {
+  //     if (newVal) {
+  //       this.getCaptcha();
+  //     }
+  //   },
+  // },
 };
 </script>
 <style lang="less" scoped>

@@ -77,27 +77,33 @@
       </mu-popover> -->
 
       <!-- 用户 -->
-      <!-- <mu-button flat slot="right" ref="button" @click="openUser = !openUser">
+      <mu-button
+        v-if="user"
+      flat slot="right" ref="button" @click="openUser = !openUser">
         <div class="user">
-          <span>王秋爽</span>
+          <span>{{ user.username }}</span>
           <mu-icon value="expand_more"></mu-icon>
         </div>
-      </mu-button> -->
-      <!-- <mu-popover :open.sync="openUser" :trigger="trigger">
+      </mu-button>
+      <mu-popover :open.sync="openUser" :trigger="trigger">
         <mu-list>
-          <mu-list-item button>
+          <mu-list-item button 
+            @click="toUserCenter"
+          >
             <mu-list-item-title>个人中心</mu-list-item-title>
           </mu-list-item>
-          <mu-list-item button>
+          <mu-list-item button
+            @click="logout"
+          >
             <mu-list-item-title>退出登录</mu-list-item-title>
           </mu-list-item>
         </mu-list>
-      </mu-popover> -->
+      </mu-popover>
     </mu-appbar>
 
     <!-- 搜索按钮 -->
     <div class="tool" v-if="isShowAction">
-      <!-- <div v-if="info.login && !user" class="tool-row">
+      <div v-if="info.login && !user" class="tool-row">
         <mu-slide-left-transition>
           <mu-button
             v-show="showToolBtn"
@@ -110,9 +116,9 @@
             >登录</mu-button
           >
         </mu-slide-left-transition>
-      </div> -->
+      </div>
       <div class="tool-row">
-        <!-- <mu-tooltip placement="right-start" content="登录/注册/搜索">
+        <mu-tooltip placement="right-start" content="登录/注册/搜索">
           <mu-button
             @click="showToolBtn = !showToolBtn"
             fab
@@ -121,9 +127,9 @@
           >
             <mu-icon value="adb"></mu-icon>
           </mu-button>
-        </mu-tooltip> -->
+        </mu-tooltip>
 
-        <!-- <mu-slide-left-transition>
+        <mu-slide-left-transition>
           <mu-button
             v-show="showToolBtn && info.openSearch"
             @click="handleSearch"
@@ -131,9 +137,9 @@
             color="error"
             >搜索</mu-button
           >
-        </mu-slide-left-transition> -->
+        </mu-slide-left-transition>
       </div>
-      <!-- <div v-if="info.register && !user" class="tool-row">
+      <div v-if="info.register && !user" class="tool-row">
         <mu-slide-left-transition>
           <mu-button
             v-show="showToolBtn"
@@ -146,7 +152,7 @@
             >注册</mu-button
           >
         </mu-slide-left-transition>
-      </div> -->
+      </div>
     </div>
 
     <RegisterForm
@@ -180,6 +186,7 @@ import RegisterForm from "@/components/RegisterForm";
 import LoginForm from "@/components/LoginForm";
 import SearchForm from "@/components/SearchForm";
 import { getSentence } from "../api/admin";
+import { Toast } from "vant";
 
 const menus = [
   {
@@ -257,7 +264,7 @@ export default {
       },
 
       showToolBtn: false,
-      user: JSON.parse(localStorage.getItem("user")),
+      user: JSON.parse(localStorage.getItem("user")) || "",
 
       openSearchModal: false,
       openLoginModal: false,
@@ -304,6 +311,17 @@ export default {
       this.$router.push({
         name: item.router,
       });
+    },
+    toUserCenter() {
+      this.$router.push({
+        name: "user",
+      });
+    },
+    // 退出登录
+    logout() {
+      localStorage.removeItem("user");
+      Toast.success("退出成功");
+      window.location.reload();
     },
     handleSearch() {
       this.openSearchModal = true;

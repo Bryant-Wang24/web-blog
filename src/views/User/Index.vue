@@ -13,8 +13,8 @@
         <img v-lazy="userInfo.avatar" alt />
         <input class="file" type="file" accept="image/*" @change="uploadFile" />
       </mu-avatar>
-      <div class="title">{{ userInfo.nickName }}</div>
-      <div class="email">{{ userInfo.email }}</div>
+      <div class="title">{{ userInfo.username }}</div>
+      <!-- <div class="email">{{ userInfo.email }}</div> -->
       <div class="desc">{{ userInfo.introduction }}</div>
     </mu-card>
 
@@ -109,10 +109,10 @@ export default {
       userInfo: {
         avatar:
           "https://wangqiushuang.online:8080/logo/github.png",
-        nickName: "永不放弃",
-        email: "1916579055@qq.com",
-        introduction:
-          "有4年开发经验，熟悉Vue、React、Angular、Taro等前端主流框架。熟悉小程序开发，以及NodeJs、Koa等技术也有深入研究。具有良好的沟通能力、工作协调能力、不断学习新技术、熟练前端技术、热衷于前端开发。",
+        username: "wangqiushuang",
+        // email: "1916579055@qq.com",
+        // introduction:
+        //   "有4年开发经验，熟悉Vue、React、Angular、Taro等前端主流框架。熟悉小程序开发，以及NodeJs、Koa等技术也有深入研究。具有良好的沟通能力、工作协调能力、不断学习新技术、熟练前端技术、热衷于前端开发。",
       },
     };
   },
@@ -121,9 +121,12 @@ export default {
     NotFound,
   },
   mounted() {
-    if (!this.email) {
+    this.userInfo = JSON.parse(localStorage.getItem("user"));
+    
+    if (!this.userInfo.username) {
       return this.$router.push("/articles");
     }
+
   },
   methods: {
     goDetail(item) {

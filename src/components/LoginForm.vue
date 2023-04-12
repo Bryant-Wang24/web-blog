@@ -12,19 +12,21 @@
         <!-- <mu-form-item label="Email" prop="email" :rules="emailRules">
           <mu-text-field v-model.trim="validateForm.email" prop="email"></mu-text-field>
         </mu-form-item> -->
-
+        <mu-form-item label="用户名" prop="username" :rules="usernameRules">
+          <mu-text-field v-model.trim="validateForm.username" type="text" prop="username"></mu-text-field>
+        </mu-form-item>
         <mu-form-item label="密码" prop="password" :rules="passwordRules">
           <mu-text-field v-model.trim="validateForm.password" type="password" prop="password"></mu-text-field>
         </mu-form-item>
 
-        <mu-form-item label="验证码" prop="captcha" :rules="captchaRules">
+        <!-- <mu-form-item label="验证码" prop="captcha" :rules="captchaRules">
           <mu-text-field placeholder="区分大小写" v-model.trim="validateForm.captcha" prop="captcha">
             <div @click="getCaptcha" class="captcha" v-html="captcha"></div>
           </mu-text-field>
-        </mu-form-item>
+        </mu-form-item> -->
       </mu-form>
 
-      <mu-button slot="actions" flat href="https://github.com/login/oauth/authorize?client_id=Iv1.355ecd3abdf8db39&redirect_uri=http://localhost:8081/articles">
+      <mu-button slot="actions" flat href="https://github.com/login/oauth/authorize?client_id=Iv1.355ecd3abdf8db39&redirect_uri=http://localhost:8080/articles">
       <!-- <mu-button slot="actions" flat href="api/v1/github/login"> -->
         <mu-avatar style="margin-right:10px" size="30">
           <img :src="Icon.github" alt />
@@ -39,6 +41,8 @@
 </template>
 <script>
 import { Icon } from "@/utils";
+import { Toast } from 'vant';
+import {login} from "@/api/admin";
 
 export default {
   props: {
@@ -55,36 +59,39 @@ export default {
   },
   data() {
     return {
-      captcha: "",
-      emailRules: [{ validate: val => !!val, message: "邮箱必填！" }],
+      // captcha: "",
+      // emailRules: [{ validate: val => !!val, message: "邮箱必填！" }],
+      usernameRules: [{ validate: val => !!val, message: "用户名必填！" }],
       passwordRules: [{ validate: val => !!val, message: "密码必填！" }],
-      captchaRules: [{ validate: val => !!val, message: "请输入验证码" }],
+      // captchaRules: [{ validate: val => !!val, message: "请输入验证码" }],
       validateForm: {
-        email: "",
+        // email: "",
+        username: "",
         password: ""
       },
       Icon
     };
   },
   methods: {
-    async getCaptcha() {
-      const res = await this.$axios.get("/captcha");
-      if (res) {
-        this.captcha = res.data;
-      }
-    },
+    // async getCaptcha() {
+    //   const res = await this.$axios.get("/captcha");
+    //   if (res) {
+    //     this.captcha = res.data;
+    //   }
+    // },
     submit() {
       this.$refs.form.validate().then(async result => {
         if (result) {
-          const res = await this.$axios.post("/login", this.validateForm);
+          const res = await login(this.validateForm);
           if (res.data) {
             localStorage.setItem("user", JSON.stringify(res.data));
-            this.$toast.success("登录成功");
+            Toast.success("登录成功");
             location.reload();
             this.$emit("toggle", false);
           } else {
-            this.$toast.error(res.msg);
-            this.getCaptcha();
+            Toast.fail(res.msg);
+            // this.$toast.error(res.msg);
+            // this.getCaptcha();
           }
         }
       });
@@ -92,23 +99,23 @@ export default {
     clear() {
       this.$refs.form.clear();
       this.validateForm = {
-        email: "",
-        nickName: "",
+        // email: "",
+        username: "",
         password: "",
-        confirmPassword: "",
-        introduction: "",
-        captcha: ""
+        // confirmPassword: "",
+        // introduction: "",
+        // captcha: ""
       };
       this.$emit("toggle", false);
     }
   },
-  watch: {
-    open(newVal) {
-      if (newVal) {
-        // this.getCaptcha();
-      }
-    }
-  }
+  // watch: {
+  //   open(newVal) {
+  //     if (newVal) {
+  //       this.getCaptcha();
+  //     }
+  //   }
+  // }
 };
 </script>
 <style lang="less" scoped>

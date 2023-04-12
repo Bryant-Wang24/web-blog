@@ -10,16 +10,17 @@
       :open.sync="open"
     >
       <mu-form ref="form" :model="validateForm">
-        <mu-form-item label="Email（用于登录，不可修改）" prop="email">
+        <!-- <mu-form-item label="Email（用于登录，不可修改）" prop="email">
           <mu-text-field
             disabled
             v-model.trim="validateForm.email"
             prop="email"
           ></mu-text-field>
-        </mu-form-item>
+        </mu-form-item> -->
 
-        <mu-form-item label="昵称" prop="nickName" :rules="nickNameRules">
+        <mu-form-item label="昵称（用于登录，不可修改）" prop="username" :rules="nickNameRules">
           <mu-text-field
+            disabled
             v-model.trim="validateForm.nickName"
             prop="nickName"
           ></mu-text-field>
@@ -141,8 +142,8 @@ export default {
     clear() {
       this.$refs.form.clear();
       this.validateForm = {
-        email: "",
-        nickName: "",
+        // email: "",
+        username: "",
         password: "",
         confirmPassword: "",
         introduction: "",
