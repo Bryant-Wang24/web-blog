@@ -18,10 +18,10 @@
           ></mu-text-field>
         </mu-form-item> -->
 
-        <mu-form-item label="昵称（用于登录，不可修改）" prop="username" :rules="nickNameRules">
+        <mu-form-item label="昵称（用于登录，不可修改）" prop="username" :rules="usernameRules">
           <mu-text-field
             disabled
-            v-model.trim="validateForm.nickName"
+            v-model.trim="validateForm.username"
             prop="nickName"
           ></mu-text-field>
         </mu-form-item>
@@ -85,7 +85,7 @@ export default {
   data() {
     return {
       visibility: false,
-      nickNameRules: [
+      usernameRules: [
         { validate: (val) => val.length <= 20, message: "昵称最大20个字符！" },
       ],
       passwordRules: [

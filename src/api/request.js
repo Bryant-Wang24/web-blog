@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from './admin'
+// import { getToken } from './admin'
 import {Toast} from 'vant'
 
 //  创建axios实例
@@ -7,7 +7,9 @@ const service = axios.create({
     baseURL: '/api/v1',
     timeout: 5000,
     headers: {
-        'Authorization': localStorage.getItem('token'),
+        // 'Authorization': localStorage.getItem('token'),
+        // 从官网发请求时，不需要带上token
+        "X-from": "web",
     }
 })
 
@@ -33,15 +35,15 @@ service.interceptors.response.use(
         //  对响应数据做点什么
         console.log('response: ', response)
         // 如果token过期或则为空，重新获取token
-        if (response.data.code === 401 || response.data.code === 100) {
-            getToken().then(res => {
-                console.log('res: ', res)
-                localStorage.setItem('token', res.data.token)
-                axios.defaults.headers.common['Authorization'] = res.data.token
-                // 刷新页面
-                window.location.reload()
-            })
-        }
+        // if (response.data.code === 401 || response.data.code === 100) {
+        //     getToken().then(res => {
+        //         console.log('res: ', res)
+        //         localStorage.setItem('token', res.data.token)
+        //         axios.defaults.headers.common['Authorization'] = res.data.token
+        //         // 刷新页面
+        //         window.location.reload()
+        //     })
+        // }
         if (response.data.code===0){
             Toast.clear()
         }

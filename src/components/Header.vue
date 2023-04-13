@@ -165,6 +165,7 @@
       @toggle="toggleSearchModal"
     ></SearchForm>
 
+
     <mu-slide-bottom-transition>
       <mu-tooltip placement="top" content="Top">
         <mu-button
@@ -185,8 +186,8 @@
 import RegisterForm from "@/components/RegisterForm";
 import LoginForm from "@/components/LoginForm";
 import SearchForm from "@/components/SearchForm";
-import { getSentence } from "../api/admin";
-import { Toast } from "vant";
+import { getSentence,getUserInfo } from "../api/admin";
+import { Toast,Dialog } from "vant";
 
 const menus = [
   {
@@ -252,6 +253,7 @@ export default {
       openUser: false,
       openTheme: false,
       openWapMenu: false,
+      openDialog: false,
 
       trigger: null,
       triggerTheme: null,
@@ -275,6 +277,10 @@ export default {
   },
   mounted() {
     this.getSentence();
+    let code = this.$route.query.code;
+    if (code) {
+      this.fetchUserInfo(code);
+    }
     // const hours = new Date().getHours();
     let defaultTheme = "selfLight";
     // if (hours >= 8 && hours <= 18) {
@@ -301,6 +307,27 @@ export default {
         this.sentence = res.data.hitokoto
       });
     },
+// 获取用户信息
+    fetchUserInfo(code) {
+      getUserInfo(code).then(res => {
+        if (res.code === 0) {
+          this.user = res.data.userInfo;
+          localStorage.setItem("user", JSON.stringify(res.data.userInfo));
+          // 跳转到article页面
+          // 怎么把article?code=xxx从路由表中去掉
+          // window.location.href = "/articles";
+          // 弹窗提示初始密码为123456，点击确定跳转到个人中心
+          Dialog.alert({
+            title: "修改密码",
+            message: `用户名为 ${res.data.userInfo.username}, 初始密码为123456，点击确认修改密码`,
+          }).then(() => {
+          });
+        } else {
+          Toast(res.data.msg);
+        }
+      });
+    },
+
     toggleWapMenu(openWapMenu) {
       this.openWapMenu = openWapMenu;
     },

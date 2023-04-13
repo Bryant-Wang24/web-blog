@@ -127,10 +127,7 @@ export default {
     },
     
     fetchArticles() {
-      // 判断url中是否有code参数，有则传给后端
-      let code = this.$route.query.code;
-    
-      getArticleList (this.page,this.pageSize,'','',code).then((res) => {
+      getArticleList (this.page,this.pageSize,'','',).then((res) => {
         if(res.code === 0) {
           res.data.list.forEach((item) => {
             item.createTime = dayjs(item.createTime).format("YYYY-MM-DD HH:mm:ss");

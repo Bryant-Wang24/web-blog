@@ -1,10 +1,10 @@
 import service from "./request";
 
 // 获取文章列表
-export function getArticleList(page = 1,pageSize = 20,categories = '',tags = '',code) {
+export function getArticleList(page = 1,pageSize = 20,categories = '',tags = '') {
     return service.request({
         method: "get",
-        url: `/articles?page=${page}&pageSize=${pageSize}&status=1&categories=${categories}&tags=${tags}&${code ? 'code=' + code : ''}`,
+        url: `/articles?page=${page}&pageSize=${pageSize}&status=1&categories=${categories}&tags=${tags}`,
     });
 }
 

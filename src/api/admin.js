@@ -38,3 +38,11 @@ export function getSentence() {
         "https://v1.hitokoto.cn/"
     );
 }
+
+// 获取用户信息
+export function getUserInfo(code='') {
+    return service.request({
+        method: "get",
+        url: "/admin/userInfo?code=" + code,
+    });
+}

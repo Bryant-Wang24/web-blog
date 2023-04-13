@@ -10,17 +10,17 @@
       :open.sync="open"
     >
       <mu-form ref="form" :model="validateForm">
-        <mu-form-item label="Email（必填）" prop="email" :rules="emailRules">
+        <!-- <mu-form-item label="Email（必填）" prop="email" :rules="emailRules">
           <mu-text-field
             v-model.trim="validateForm.email"
             prop="email"
           ></mu-text-field>
-        </mu-form-item>
+        </mu-form-item> -->
 
-        <mu-form-item label="昵称" prop="nickName" :rules="nickNameRules">
+        <mu-form-item label="昵称" prop="username" :rules="usernameRules">
           <mu-text-field
-            v-model.trim="validateForm.nickName"
-            prop="nickName"
+            v-model.trim="validateForm.username"
+            prop="username"
           ></mu-text-field>
         </mu-form-item>
 
@@ -112,7 +112,7 @@ export default {
           message: "邮箱格式错误！",
         },
       ],
-      nickNameRules: [
+      usernameRules: [
         { validate: (val) => val.length <= 20, message: "昵称最大20个字符！" },
       ],
       passwordRules: [
@@ -143,7 +143,7 @@ export default {
       // ],
       validateForm: {
         email: "",
-        nickName: "",
+        username: "",
         password: "",
         confirmPassword: "",
         // introduction: "",
@@ -164,7 +164,7 @@ export default {
         console.log(this.validateForm,result)
         if (result) {
           const res = await register({
-            username: this.validateForm.nickName,
+            username: this.validateForm.username,
             password: this.validateForm.password,
           });
           console.log("res",res)
@@ -185,7 +185,7 @@ export default {
       this.$refs.form.clear();
       this.validateForm = {
         email: "",
-        nickName: "",
+        username: "",
         password: "",
         confirmPassword: "",
         // introduction: "",
