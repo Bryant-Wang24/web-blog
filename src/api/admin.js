@@ -23,11 +23,20 @@ export function login(params={username: "admin", password: "123456"}) {
     });
 }
 
-// 注册接口
-export function register(params){
+// 修改密码接口
+export function changePassword(params){
     return service.request({
         method: "post",
-        url: "/admin/register",
+        url: "/admin/changePassword",
+        data: params,
+    });
+}
+
+// 注册接口
+export function register(params,from=''){
+    return service.request({
+        method: "post",
+        url: `/admin/register?from=${from}`,
         data: params,
     });
 }

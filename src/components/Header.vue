@@ -186,7 +186,7 @@
 import RegisterForm from "@/components/RegisterForm";
 import LoginForm from "@/components/LoginForm";
 import SearchForm from "@/components/SearchForm";
-import { getSentence,getUserInfo } from "../api/admin";
+import { getSentence,getUserInfo,register} from "../api/admin";
 import { Toast,Dialog } from "vant";
 
 const menus = [
@@ -312,18 +312,29 @@ export default {
       getUserInfo(code).then(res => {
         if (res.code === 0) {
           this.user = res.data.userInfo;
+          register({
+            username:res.data.userInfo.username,
+            password:"user123456",
+          },"github")
           localStorage.setItem("user", JSON.stringify(res.data.userInfo));
-          // 跳转到article页面
-          // 怎么把article?code=xxx从路由表中去掉
-          // window.location.href = "/articles";
-          // 弹窗提示初始密码为123456，点击确定跳转到个人中心
+          // 第三方登录成功后，注册用户
+          this.$router.push({
+            name: "articles",
+          });
           Dialog.alert({
             title: "修改密码",
-            message: `用户名为 ${res.data.userInfo.username}, 初始密码为123456，点击确认修改密码`,
+            message: `用户名为 "${res.data.userInfo.username}", 初始密码为"user123456"，点击确认修改密码`,
           }).then(() => {
+          //  跳转到user页面,并传递id=1作为打开弹窗的标识
+            this.$router.push({
+              name: "user",
+              query: {
+                id: 1,
+              },
+            });
           });
         } else {
-          Toast(res.data.msg);
+          Toast(res.msg);
         }
       });
     },

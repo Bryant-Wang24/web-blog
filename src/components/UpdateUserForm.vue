@@ -48,7 +48,7 @@
           ></mu-text-field>
         </mu-form-item>
 
-        <mu-form-item
+        <!-- <mu-form-item
           label="个人简介"
           prop="introduction"
           :rules="introductionRules"
@@ -60,7 +60,7 @@
             :rows="4"
             full-width
           ></mu-text-field>
-        </mu-form-item>
+        </mu-form-item> -->
       </mu-form>
 
       <mu-button slot="actions" flat small @click="clear">取消</mu-button>
@@ -71,6 +71,8 @@
   </div>
 </template>
 <script>
+import { Toast } from 'vant';
+import { changePassword } from '../api/admin';
 export default {
   props: {
     open: {
@@ -91,6 +93,7 @@ export default {
       passwordRules: [
         {
           validate: (val) => {
+            if(!val) return false;
             if (val) {
               let reg = /^[a-zA-Z]\w{5,19}$/;
               return reg.test(val);
@@ -119,12 +122,12 @@ export default {
           message: "密码不一致，请重新输入！",
         },
       ],
-      introductionRules: [
-        {
-          validate: (val) => val.length <= 1000,
-          message: "最大1000字符",
-        },
-      ],
+      // introductionRules: [
+      //   {
+      //     validate: (val) => val?.length <= 1000,
+      //     message: "最大1000字符",
+      //   },
+      // ],
       validateForm: {
         ...this.userInfo,
         password: "",
@@ -136,6 +139,23 @@ export default {
     submit() {
       this.$refs.form.validate().then(async (result) => {
         console.log(result);
+        // 更新密码
+        if (result) {
+          try {
+            const res = await changePassword({
+            username: this.validateForm.username,
+            password: this.validateForm.password,
+          });
+          if (res.code === 0) {
+            Toast.success('修改密码成功');
+            this.$emit("toggle", false);
+          } else {
+            Toast.fail(res.msg || '修改密码失败');
+          }
+          } catch (error) {
+            Toast.fail("修改密码失败");
+          }
+        }
       });
     },
     async logout() {},
@@ -146,7 +166,7 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        introduction: "",
+        // introduction: "",
       };
       this.$emit("toggle", false);
     },

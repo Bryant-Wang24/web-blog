@@ -77,34 +77,11 @@ export default {
   name: "user",
   data() {
     return {
-      email:
-        "1916579055@qq.com" || JSON.parse(localStorage.getItem("user")).email,
+      // email:
+      //   "1916579055@qq.com" || JSON.parse(localStorage.getItem("user")).email,
       openUpdateModal: this.$route.query.id == 1,
       collectList: [
-        {
-          categories: "技术",
-          collect: 0,
-          comment: 0,
-          content:
-            "### 1.注册GitHub账号并创建一个OAuth Apps↵↵​登录GitHub账号然后右上角找到你的头像点击",
-          cover: "https://wangqiushuang.online:8080/logo/github.png",
-          createTime: 1612341189,
-          introduction:
-            "『登录鉴权』 是一个常见的业务场景，包括『账号密码登录方式』和『第三方统一登录』。其中，后者我们经常使用到，如 Google， GitHub，QQ 统一登录，它们都是基于 OAuth 规范。",
-          isCollect: true,
-          isComment: true,
-          isLike: true,
-          isReward: true,
-          like: 1,
-          publishStatus: 1,
-          sort: 0,
-          status: 1,
-          tags: ["Node.js", "Egg"],
-          title: "使用Egg通过GitHub来实现用户登录",
-          updateTime: 1612341807,
-          views: 6,
-          _id: "601a5fc5e268db458626523d",
-        },
+        
       ],
       userInfo: {
         avatar:
@@ -139,6 +116,7 @@ export default {
       this.openUpdateModal = openUpdateModal;
       if (isUpdate) {
         // 重新获取用户信息
+        this.userInfo = JSON.parse(localStorage.getItem("user"));
       }
     },
     uploadFile() {},

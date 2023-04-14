@@ -38,7 +38,7 @@
               <span>{{item.introduction}}</span>
             </mu-list-item-sub-title>
           </mu-list-item-content>
-          <mu-list-item-action style="min-width:140px;">{{item.createTime | filterDate}}</mu-list-item-action>
+          <mu-list-item-action style="min-width:140px;">{{item.createTime}}</mu-list-item-action>
         </mu-list-item>
       </mu-list>
 
@@ -49,6 +49,9 @@
   </div>
 </template>
 <script>
+import { getTagList } from '../api/tag';
+import {getArticleList} from '../api/article';
+import dayjs from 'dayjs';
 export default {
   props: ["open"],
   computed: {
@@ -70,11 +73,11 @@ export default {
     };
   },
   mounted() {
-    // this.getTags();
+    this.getTags();
   },
   methods: {
     async getTags() {
-      const res = await this.$axios.get("/tags");
+      const res = await getTagList();
       if (res.data) {
         this.keywords = res.data.list.map(item => item.name);
       }
@@ -86,18 +89,19 @@ export default {
     },
     async handleSearch() {
       if (!this.keyword) return;
-      const res = await this.$axios.post("/articles/keyword", {
-        keyword: this.keyword
-      });
-      if (res.data) {
-        this.list = res.data.list;
+      const res = await getArticleList(1,99999,'',this.keyword);
+      if (res.code===0) {
+        this.list = res.data.list.map(item => {
+          item.createTime = dayjs(item.createTime).format("YYYY-MM-DD HH:mm:ss");
+          return item;
+        });
       }
     },
     goDetail(item) {
       this.clear();
       this.$router.push({
         name: "articlesDetails",
-        query: { id: item._id }
+        query: { id: item.id }
       });
     }
   }
