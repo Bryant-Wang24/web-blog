@@ -15,3 +15,27 @@ export function getArticleDetail(id,from = 'web') {
         url: `/articles/${id}/edit?type=${from}`,
     });
 }
+
+// 点赞
+export function postArticleLike({userId,articleId}) {
+    return service.request({
+        method: "post",
+        url: `/articles/like`,
+        data: {
+            userId,
+            articleId
+        }
+    });
+}
+
+// 收藏
+export function postArticleCollect({userId,articleId}) {
+    return service.request({
+        method: "post",
+        url: `/articles/collect`,
+        data: {
+            userId,
+            articleId
+        }
+    });
+}

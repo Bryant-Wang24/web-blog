@@ -12,13 +12,13 @@
         </div>
       </mu-card>
       <div class="action" :class="toc.length > 0 ? '' : 'noMulu'">
-        <!-- <mu-tooltip placement="top" content="点赞">
-          <mu-button fab color="primary">
-            <mu-icon value="thumb_up"></mu-icon>
+        <mu-tooltip placement="top" content="点赞" >
+          <mu-button fab color="primary" @click="handleLike">
+            <mu-icon value="thumb_up" ></mu-icon>
           </mu-button>
         </mu-tooltip>
 
-        <mu-tooltip placement="top" content="收藏">
+        <!-- <mu-tooltip placement="top" content="收藏">
           <mu-button fab color="purple500">
             <mu-icon value="grade"></mu-icon>
           </mu-button>
@@ -59,9 +59,9 @@
               <mu-button class="cursor-default" flat color="error"
                 >评论({{ info.comment }})</mu-button
               >
-              <!-- <mu-button class="cursor-default" flat color="primary"
+              <mu-button class="cursor-default" flat color="primary"
                 >点赞({{ info.like }})</mu-button
-              > -->
+              >
               <mu-button class="cursor-default" flat color="#9e9e9e"
                 >{{ info.createTime }}</mu-button
               >
@@ -155,8 +155,9 @@ import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 // import { markdown } from "@/utils/markdown";
 import $ from "jquery";
-import { getArticleDetail } from '../../api/article';
+import { getArticleDetail, postArticleLike } from '../../api/article';
 import dayjs from "dayjs";
+import { Toast } from "vant";
 
 export default {
   name: "articlesDetails",
@@ -270,6 +271,24 @@ export default {
     console.log(this.commentList);
   },
   methods: {
+    // 点赞
+    handleLike() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) {
+        Toast.fail("请先登录");
+        return;
+      }
+      const userId = user.userId;
+      const articleId = parseInt(this.$route.query.id);
+      postArticleLike({ userId, articleId }).then((res) => {
+        if(res.code===0){
+          Toast.success(res.msg || "点赞成功");
+        } else {
+          Toast.fail(res.msg || "点赞失败");
+        }
+      });
+    },
+
     scrollToPosition(id) {
       var position = $(id).offset();
       position.top = position.top - 80;
@@ -341,6 +360,10 @@ export default {
   flex-direction: column;
   align-items: center;
   height: 400px;
+}
+.isLike {
+  //点赞后的样式
+  color: orangered;
 }
 
 .content {
