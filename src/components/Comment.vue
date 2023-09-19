@@ -71,7 +71,7 @@ export default {
         setTimeout(() => {
           Toast.clear();
           Toast.success("评论成功,请等待审核");
-        }, 1000);
+        }, 300);
       // }
     },
   },
